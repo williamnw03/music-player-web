@@ -5,7 +5,6 @@ function App() {
   return (
     <div className="App">
       <Nav></Nav>
-      <h1>INI REACT APP</h1>
     </div>
   );
 }
