@@ -1,0 +1,54 @@
+@import url("../../index.css");
+
+nav.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.8em;
+}
+
+/* Search Bar */
+nav.navbar div.searchbar-section{
+    width: 100%;
+}
+
+nav.navbar div.searchbar-section input.searchbar{
+    border-radius: 2em;
+    border: none;
+
+    padding: 0.4em;
+    background-color: var(--white);
+
+    color: var(--green-dark);
+
+    width: 100%;
+}
+
+nav.navbar div.searchbar-section input.searchbar::placeholder{
+    padding: 0.4em;
+
+    color: var(--green-dark);
+}
+
+/* Navigation */
+nav.navbar div.navigation-section{
+    display: none;
+}
+
+nav.navbar div.navigation-section ul{
+    display: flex;
+
+    list-style-type: none;
+
+    font-size: 1.5em;
+    line-height: 0;
+}
+
+nav.navbar div.navigation-section ul li a{
+    display: block;
+
+    color: var(--white);
+
+    padding: 0.3em;
+}
