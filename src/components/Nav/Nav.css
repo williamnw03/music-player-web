@@ -31,68 +31,6 @@ nav.navbar div.searchbar-section input.searchbar::placeholder{
     color: var(--green-dark);
 }
 
-/* Dropdown for Search Bar */
-nav.navbar div.searchbar-section div.dropdown{
-    position: absolute;
-    top: 120%;
-
-    background-color: var(--white);
-    width: 100%;
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 1em;
-    color: var(--green-dark);
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music:nth-child(odd){
-    background-color: var(--green-white);
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music:nth-child(even){
-    background-color: var(--white);
-}
-
-/* Text Content */
-nav.navbar div.searchbar-section div.dropdown div.list-music div.text-content p.title-music{
-    line-height: 1em;
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music div.text-content p.artist-music{
-    font-size: 0.8em;
-    color: var(--dark);
-
-    line-height: 1em;
-}
-
-/* Playlists */
-nav.navbar div.searchbar-section div.dropdown div.list-music div.playlist-button{
-    position: relative;
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music div.playlist-button div.button{
-    font-size: 1.3em;
-    line-height: 0;
-    padding: 0.4em;
-}
-
-nav.navbar div.searchbar-section div.dropdown div.list-music div.playlist-button div.playlists{
-    display: none;
-
-    position: absolute;
-    right: 0.4em;
-    z-index: 100;
-    
-    padding: 1em;
-
-    background-color: var(--green-dark);
-    color: var(--white);
-}
-
 /* Navigation */
 nav.navbar div.navigation-section ul{
     display: flex;

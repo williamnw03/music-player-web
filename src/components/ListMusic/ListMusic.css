@@ -1,0 +1,104 @@
+
+/* Variables */
+:root {
+    /* Radius */
+    --card-radius-280: 0.5em;
+}
+
+
+/* list-music */
+div.list-music{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 5em;
+    padding: 1em;
+    border-radius: var(--card-radius-280);
+
+    color: var(--green-dark);
+}
+
+div.list-music:nth-child(odd){
+    background-color: var(--green-white);
+}
+
+div.list-music:nth-child(even){
+    background-color: var(--white);
+}
+
+/* Image */
+div.list-music div.image {
+    line-height: 0;
+    height: 3em;
+}
+
+
+div.list-music div.image img {
+    height: 100%;
+    border-radius: var(--card-radius-280);
+}
+
+/* Text Content */
+div.list-music div.text-content{
+    flex-grow: 1;
+    padding-left: 1em;
+}
+
+div.list-music div.text-content p.title-music{
+    line-height: 1em;
+}
+
+div.list-music div.text-content p.artist-music{
+    font-size: 0.8em;
+    color: var(--dark);
+
+    line-height: 1em;
+}
+
+/* Playlists */
+div.list-music div.playlist-button{
+    position: relative;
+
+}
+
+div.list-music div.playlist-button div.button{
+    font-size: 1.3em;
+    line-height: 0;
+    padding: 0.4em;
+}
+
+div.list-music div.playlist-button div.playlists{
+    position: absolute;
+    top: 120%;
+    right: 50%;
+    z-index: 100;
+
+    min-width: 50vw;
+    max-width: min-content;
+    border-radius: 0.5em;
+    background-color: var(--green-dark);
+    color: var(--white);
+}
+
+div.list-music div.playlist-button div.playlists a.playlist{
+    display: block;
+
+    color: var(--white);
+    text-decoration: none;
+
+    border-top: 1px solid var(--white);
+
+    padding: 1em;
+
+}
+
+div.list-music div.playlist-button div.playlists a.playlist:first-child{
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+div.list-music div.playlist-button div.playlists a.playlist:last-child{
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
