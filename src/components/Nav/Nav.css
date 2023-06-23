@@ -1,11 +1,5 @@
 @import url("../../index.css");
 
-:root {
-    --space-sidebar-768: 18.5vw;
-    --space-sidebar-1280: 10vw;
-}
-
-
 div.nav-padding{
     padding: 0.8em;
 }
@@ -191,10 +185,10 @@ nav.navbar div.navigation-section ul li a:hover{
     
 }
 
-@media all and (min-width: 1280px){
+@media all and (min-width: 1024px){
     /* Search Bar */
     nav.navbar div.searchbar-section {
-        margin-left: var(--space-sidebar-1280);
+        margin-left: var(--space-sidebar-1024);
     }
 
 }

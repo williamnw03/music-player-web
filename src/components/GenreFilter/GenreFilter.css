@@ -1,0 +1,75 @@
+@import url("../../index.css");
+
+.swiper{
+    margin-top: 1.5em;
+
+    width: 90vw;
+    height: 100%;
+}
+
+.swiper-slide{
+  text-align: center;
+  font-size: 0.8em;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Content Box */
+div.content-slide{
+    background-color: var(--white);
+    color: var(--green-dark);
+    opacity: 0.7;
+
+    padding: 0.3em 1.8em;
+    border-radius: 0.5em;
+
+    width: 60%;
+}
+
+/* Button */
+div.swiper-button-prev::after, div.swiper-button-next::after{
+    font-size: 1em;
+    color: var(--green-dark);
+}
+
+div.swiper-button-prev{
+    background-color: var(--green-white);
+    left: 0;
+}
+
+div.swiper-button-next{
+    background-color: var(--green-white);
+    right: 0;
+}
+
+@media all and (min-width: 375px){
+    /* Content Box */
+    div.content-slide{
+        width: 90%;
+    }
+}
+
+@media all and (min-width: 768px){
+    .swiper {
+        margin-left: var(--space-sidebar-768);
+        width: 70vw;
+    }
+
+    .swiper-slide{
+        font-size: 1em;
+    }
+}
+
+@media all and (min-width: 1024px){
+    .swiper {
+        margin-left: var(--space-sidebar-1024);
+    }
+
+    /* Content Box */
+    div.content-slide{
+        width: 90%;
+    }
+}
