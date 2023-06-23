@@ -10,8 +10,6 @@ import { HouseDoorFill, MusicNoteList,ThreeDotsVertical } from "react-bootstrap-
 // Import CSS
 import "./Nav.css"
 
-
-
 function Nav() {
     const [activePlaylist, setActivePlaylist] = useState(false)
 

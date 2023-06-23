@@ -41,15 +41,21 @@ function GenreFilter() {
         return () => window.removeEventListener("resize", checkWindowWidth)
     },[])
 
+    // Choose Genres
+    const activeGenre = (e) => {
+        e.target.classList.toggle("active-genre")
+    }
+
     return (
     
-    <Swiper navigation={true} loop={true} modules={[Navigation]} slidesPerView={slidesPerView} className="mySwiper">
-        <SwiperSlide><div className="content-slide">Slide 1</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide">Slide 2</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide">Slide 3</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide">Slide 4</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide">Slide 5</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide">Slide 6</div></SwiperSlide>
+    <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} className="mySwiper">
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 1</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 2</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 3</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 4</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 5</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 6</div></SwiperSlide>
+        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 7</div></SwiperSlide>
     </Swiper>
     )
 }
