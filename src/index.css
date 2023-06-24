@@ -8,13 +8,17 @@
     --green-white: #B9D2D2;
     --white: #F5F5F5;
 
+    /* Size Sidebar */
+    --size-sidebar-768: 8vw;
+    --size-sidebar-1024: 6vw;
+
     /* Space Sidebar */
-    --space-sidebar-768: 18.5vw;
-    --space-sidebar-1024: 10vw;
+    --space-sidebar-768: calc(var(--size-sidebar-768) + 10vw);
+    --space-sidebar-1024: calc(var(--size-sidebar-1024) + 4vw);
 
     /* Width for Rightside */
-    --width-rightside-768: 70vw;
-    --width-rightside-1024: 85vw;
+    --width-rightside-768: calc(100vw - var(--size-sidebar-768) - 20vw);
+    --width-rightside-1024: calc(100vw - var(--size-sidebar-1024) - 8vw);
 
     /* Padding */
     --padding-rule-280: 0.8em;

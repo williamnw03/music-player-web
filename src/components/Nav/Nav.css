@@ -131,6 +131,7 @@ nav.navbar div.navigation-section ul li a:hover{
         position: fixed;
         top: 0;
 
+        width: var(--size-sidebar-768);
         height: 100vh;
 
         background-color: var(--white);
@@ -138,6 +139,8 @@ nav.navbar div.navigation-section ul li a:hover{
     
     nav.navbar div.navigation-section ul{
         flex-direction: column;
+
+        width: 100%;
 
         position: relative;
     }
@@ -157,6 +160,12 @@ nav.navbar div.navigation-section ul li a:hover{
     }
 
     nav.navbar div.navigation-section ul li a{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+
+        height: var(--size-sidebar-768);
+
         position: relative;
         color: var(--green-dark);
 
@@ -190,6 +199,15 @@ nav.navbar div.navigation-section ul li a:hover{
     /* Search Bar */
     nav.navbar div.searchbar-section {
         margin-left: var(--space-sidebar-1024);
+    }
+
+    /* Navigation */
+    nav.navbar div.navigation-section{
+        width: var(--size-sidebar-1024);
+    }
+
+    nav.navbar div.navigation-section ul li a{
+        height: var(--size-sidebar-1024);
     }
 
 }

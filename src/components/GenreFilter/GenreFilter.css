@@ -62,6 +62,7 @@ div.swiper-button-next{
 
 @media all and (min-width: 768px){
     .swiper {
+        margin-top: 3em;
         margin-left: var(--space-sidebar-768);
         width: var(--width-rightside-768);
     }
