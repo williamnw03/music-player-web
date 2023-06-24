@@ -1,0 +1,29 @@
+@import url("../../index.css");
+
+div.all-list-music {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    gap: 1em;
+
+    padding: var(--padding-rule-280);
+    margin-top: 2em;
+}
+
+@media all and (min-width: 768px) {
+    div.all-list-music {
+        gap: 1.5em;
+        grid-template-columns: repeat(2, 1fr);
+
+        width: var(--width-rightside-768);
+        padding: 0;
+        margin-left: var(--space-sidebar-768);
+    }
+}
+
+@media all and (min-width: 1024px) {
+    div.all-list-music {
+        width: var(--width-rightside-1024);
+        margin-left: var(--space-sidebar-1024);
+    }
+}

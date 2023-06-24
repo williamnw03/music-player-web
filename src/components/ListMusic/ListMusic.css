@@ -5,18 +5,18 @@
     --card-radius-280: 0.5em;
 }
 
-
 /* list-music */
 div.list-music{
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    height: 5em;
+    
+    min-height: 5em;
     padding: 1em;
     border-radius: var(--card-radius-280);
 
     color: var(--green-dark);
+    
 }
 
 div.list-music:nth-child(odd){
@@ -28,13 +28,13 @@ div.list-music:nth-child(even){
 }
 
 /* Image */
-div.list-music div.image {
+div.list-music div.image{
     line-height: 0;
     height: 3em;
 }
 
 
-div.list-music div.image img {
+div.list-music div.image img{
     height: 100%;
     border-radius: var(--card-radius-280);
 }
@@ -59,13 +59,15 @@ div.list-music div.text-content p.artist-music{
 /* Playlists */
 div.list-music div.playlist-button{
     position: relative;
-
 }
 
-div.list-music div.playlist-button div.button{
-    font-size: 1.3em;
+div.list-music div.playlist-button div.button-playlists{
+    font-size: 1.4em;
+
     line-height: 0;
     padding: 0.4em;
+
+    cursor: pointer;
 }
 
 div.list-music div.playlist-button div.playlists{
@@ -79,6 +81,14 @@ div.list-music div.playlist-button div.playlists{
     border-radius: 0.5em;
     background-color: var(--green-dark);
     color: var(--white);
+
+    box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.2);
+
+    display: none;
+}
+
+div.list-music div.playlist-button div.playlists.playlists-muncul{
+    display: block;
 }
 
 div.list-music div.playlist-button div.playlists a.playlist{
@@ -94,11 +104,26 @@ div.list-music div.playlist-button div.playlists a.playlist{
 }
 
 div.list-music div.playlist-button div.playlists a.playlist:first-child{
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
+    border-top: 0;
 }
 
 div.list-music div.playlist-button div.playlists a.playlist:last-child{
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
+}
+
+@media all and (min-width: 768px) {
+    /* list-music */
+    div.list-music{
+        flex-wrap: nowrap;
+    }
+
+    /* Playlists */
+    div.list-music div.playlist-button div.playlists{
+        min-width: 20vw;
+    }
+
+    div.list-music div.playlist-button div.button-playlists{
+        font-size: 1.6em;
+    }
 }

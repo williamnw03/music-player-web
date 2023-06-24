@@ -12,6 +12,10 @@
     --space-sidebar-768: 18.5vw;
     --space-sidebar-1024: 10vw;
 
+    /* Width for Rightside */
+    --width-rightside-768: 70vw;
+    --width-rightside-1024: 85vw;
+
     /* Padding */
     --padding-rule-280: 0.8em;
     --padding-rule-320: 0.8em 2em;

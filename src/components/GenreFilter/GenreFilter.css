@@ -63,7 +63,7 @@ div.swiper-button-next{
 @media all and (min-width: 768px){
     .swiper {
         margin-left: var(--space-sidebar-768);
-        width: 70vw;
+        width: var(--width-rightside-768);
     }
 
     .swiper-slide{

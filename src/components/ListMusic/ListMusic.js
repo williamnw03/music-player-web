@@ -1,4 +1,5 @@
 // Import Font Icon
+import { useState } from "react"
 import { ThreeDotsVertical } from "react-bootstrap-icons"
 
 // Import CSS
@@ -7,7 +8,8 @@ import "./ListMusic.css"
 // Import Components
 import Playlist from "./Playlist"
 
-function ListMusic() {
+function ListMusic(props) {
+
     return (
         <div className="list-music">
             <div className="image">
@@ -20,9 +22,9 @@ function ListMusic() {
             </div>
 
             <div className="playlist-button">
-            <div className="button"><ThreeDotsVertical/></div>
+            <div className="button-playlists" onClick={() => props.munculPlaylists(props.data.id)}><ThreeDotsVertical className="button-playlists"/></div>
 
-                <div className="playlists">
+                <div className={`playlists ${props.data.active ? "playlists-muncul" : ""}`}>
                     <Playlist/>
                     <Playlist/>
                     <Playlist/>
