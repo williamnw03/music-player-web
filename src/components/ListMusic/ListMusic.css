@@ -16,7 +16,14 @@ div.list-music{
     border-radius: var(--card-radius-280);
 
     color: var(--green-dark);
-    
+
+    cursor: pointer;
+
+    transition: transform 0.3s;
+}
+
+div.list-music:hover{
+    transform: scale(1.04);
 }
 
 div.list-music:nth-child(odd){
