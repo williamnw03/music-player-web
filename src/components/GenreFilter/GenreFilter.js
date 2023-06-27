@@ -13,7 +13,7 @@ import { Navigation } from "swiper"
 import "./GenreFilter.css"
 import { useEffect, useState } from "react"
 
-function GenreFilter() {
+function GenreFilter({totalGenre}) {
 
     const [slidesPerView, setSlidesPerView] = useState(1)
 
@@ -49,13 +49,10 @@ function GenreFilter() {
     return (
     
     <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} className="mySwiper">
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 1</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 2</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 3</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 4</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 5</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 6</div></SwiperSlide>
-        <SwiperSlide><div className="content-slide" onClick={activeGenre}>Slide 7</div></SwiperSlide>
+
+        {totalGenre.map((genre, i) => {
+            return <SwiperSlide key={i}><div className="content-slide" onClick={activeGenre}>{genre}</div></SwiperSlide>
+        })}
     </Swiper>
     )
 }

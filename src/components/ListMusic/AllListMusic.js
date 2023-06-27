@@ -6,31 +6,50 @@ import ListMusic from "./ListMusic"
 import "./AllListMusic.css"
 import { useEffect, useState } from "react"
 
-function AllListMusic() {
+function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre}) {
 
-    // Data
-    const [data, setData] = useState(Array(50).fill().map((e, i) => ({id: i+1, active: false})))
+    // Fetch Music
+    const fetchMusic = async () => {
+        const resp = await fetch("./music-data.json")
+        const data = await resp.json()
+
+        setData(data.map(e => {
+            return {...e, active: false, show: true}
+        }))
+
+        const genres = []
+        data.forEach(e => {
+            e.genre.forEach(e2 => {
+                if(!genres.includes(e2)){
+                    genres.push(e2)
+                }
+            })
+        });
+
+        setTotalGenre(genres)
+
+
+    }
 
     // Show Playlists
     const munculPlaylists = (id) => {
         setData(prev => {
             return prev.map(e => {
                 if(e.id === id) {
-                    return {id: e.id, active: true}
+                    return {...e, active: true}
                 } else {
-                    return {id: e.id, active: false}
+                    return {...e, active: false}
                 }
             })
         })
     }
 
+    // Close Playlists
     const closePlaylists = (e) => {
 
-
         if(e.target.parentElement === null) {
-
             setData(prev => prev.map(e => {
-                return {id: e.id, active: false}
+                return {...e, active: false}
             }))
 
             return false
@@ -38,13 +57,30 @@ function AllListMusic() {
 
         if(!e.target.classList.contains("button-playlists") && !e.target.parentElement.classList.contains("button-playlists")) {
             setData(prev => prev.map(e => {
-                return {id: e.id, active: false}
+                return {...e, active: false}
             }))
         }
 
     }
 
+    // Change Music
+    const changeMusic = (e, fileName, data) => {
+
+        if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists")) {
+            return false
+        }
+        setMusic(prev => {
+            const newAudio = prev
+            newAudio.src = `./music/${fileName}.mp3`
+            return newAudio
+        }) 
+        setCurrentMusic(data)
+    }
+
     useEffect(() => {
+        // Fetch Music
+        fetchMusic()
+
         document.addEventListener("click", closePlaylists)
 
         return () => {
@@ -57,9 +93,11 @@ function AllListMusic() {
 
             {data.map((e, i) => {
 
-                return (
-                    <ListMusic key={i} munculPlaylists={munculPlaylists} data={e}></ListMusic>
-                )
+                if(e.show){
+                    return (
+                        <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
+                    )
+                }
             })}
         </div>
 

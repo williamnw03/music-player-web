@@ -5,12 +5,9 @@ import { PlayFill, PauseFill, VolumeUpFill, VolumeMuteFill, SkipStartFill, SkipE
 // Import CSS
 import "./MusicController.css"
 
-function MusicController() {
-    const [music, setMusic] = useState(new Audio("../music/A Flute's Mourning - Aakash Gandhi.mp3")
-    )
+function MusicController({music, currentMusic}) {
     const [musicDuration, setMusicDuration] = useState(0)
     const [musicCurrentDuration, setMusicCurrentDuration] = useState(0)
-    music.preload = "metadata"
 
     const [SoundSlider, setSoundSlider] = useState(false)
     const [playMusic, setPlayMusic] = useState(false)
@@ -20,7 +17,11 @@ function MusicController() {
 
     const showSoundSlider = () => setSoundSlider(prev => !prev)
 
-    const playTheMusic = () => setPlayMusic(prev => !prev)
+    const playTheMusic = () => {
+        if(currentMusic.title !== ""){
+            setPlayMusic(prev => !prev)
+        }
+    }
     
     const setTheVolume = (e, music) => {
         music.volume = e.target.value/100
@@ -34,8 +35,8 @@ function MusicController() {
     }
 
     const setTheLoop = (music) => {
-        console.log(music.loop)
         setLoop(prev => !prev)
+        music.loop = music.loop ? false : true
     }
 
     const checkMusicLoaded = (e) => {
@@ -48,9 +49,21 @@ function MusicController() {
     }
 
     // Music Play
-    if(playMusic){
-        music.play()
-        
+    if(playMusic && currentMusic.title !== ""){
+
+        if(music.ended){
+            if(music.loop){
+                music.play()
+            } else {
+                if(playMusic){
+                    music.play()
+                } else {
+                    music.pause()
+                }
+            }
+        } else {
+            music.play()
+        }
     } else {
         music.pause()
     }
@@ -70,8 +83,8 @@ function MusicController() {
 
             <div className="music-controller-wrapper">
                 <div className="text-content">
-                    <h3>Berak Tak Cebok</h3>
-                    <p>Kufaku</p>
+                    <h3>{currentMusic.title}</h3>
+                    <p>{currentMusic.artist}</p>
                 </div>
 
                 <div className="controller">
@@ -88,9 +101,9 @@ function MusicController() {
                             <input type="range" className="slider" max={100} min={0} value={volume} onChange={(e) => setTheVolume(e, music)}/>
                         </div>
 
-                        <button className="prev"><SkipStartFill></SkipStartFill></button>
-                        <button className="play-pause" onClick={playTheMusic}>{playMusic ? <PauseFill/> : <PlayFill/>}</button>
-                        <button className="next"><SkipEndFill></SkipEndFill></button>
+                        <button className="prev" style={{opacity: !currentMusic.title ? 0.3 : 1}}><SkipStartFill></SkipStartFill></button>
+                        <button className="play-pause" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={playTheMusic}>{playMusic ? <PauseFill/> : <PlayFill/>}</button>
+                        <button className="next" style={{opacity: !currentMusic.title ? 0.3 : 1}}><SkipEndFill></SkipEndFill></button>
                         <button className="loop" onClick={() => setTheLoop(music)} style={{opacity: loop ? 1 : 0.3}}><Repeat></Repeat></button>
                     </div>
 

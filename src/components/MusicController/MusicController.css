@@ -4,6 +4,7 @@ div.music-controller {
     align-items: center;
 
     position: fixed;
+    z-index: 1000;
     top: 100vh;
     transform: translateY(-100%);
 
@@ -30,7 +31,7 @@ div.music-controller div.text-content h3{
 }
 
 div.music-controller div.text-content p{
-    line-height: 0.8em;
+    line-height: 1em;
     color: var(--dark);
 
     font-size: 0.8em;
@@ -246,6 +247,8 @@ div.controller-sound input.slider::-moz-range-thumb{
         margin-left: 3vw;
 
         text-align: left;
+
+        width: 20vw;
     }
 
     div.music-controller div.text-content h3{

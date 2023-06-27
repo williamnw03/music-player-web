@@ -6,7 +6,7 @@ import { HouseDoorFill, MusicNoteList, ThreeDotsVertical } from "react-bootstrap
 // Import CSS
 import "./Nav.css"
 
-function Nav() {
+function Nav({searchValue, setTheSearchValue}) {
     const [activePlaylist, setActivePlaylist] = useState(false)
 
     // Sidebar Active Page
@@ -16,7 +16,7 @@ function Nav() {
         <div className="nav-padding">
             <nav className="navbar">
                 <div className="searchbar-section">
-                    <input type="text" className="searchbar" placeholder="Search..."/>
+                    <input type="text" className="searchbar" value={searchValue} placeholder="Search..." onChange={setTheSearchValue}/>
                 </div>
 
                 <div className="navigation-section">

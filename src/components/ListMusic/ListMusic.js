@@ -11,14 +11,14 @@ import Playlist from "./Playlist"
 function ListMusic(props) {
 
     return (
-        <div className="list-music">
+        <div className="list-music" data-music-src={`../music/${props.data.fileName}`} onClick={(e) => props.changeMusic(e, props.data.fileName, props.data)}>
             <div className="image">
-                <img src="https://api.dicebear.com/6.x/thumbs/svg?seed=Berak Tak Cebok&backgroundColor=62A388" alt="Image" />
+                <img src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${props.data.title}&backgroundColor=62A388`} alt="Image" />
             </div>
 
             <div className="text-content">
-                <p className="title-music">Berak Tak Cebok</p>
-                <p className="artist-music">Kufaku</p>
+                <p className="title-music">{props.data.title}</p>
+                <p className="artist-music">{props.data.artist}</p>
             </div>
 
             <div className="playlist-button">
