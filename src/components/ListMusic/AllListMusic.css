@@ -8,7 +8,6 @@ div.all-list-music {
 
     padding: var(--padding-rule-280);
     margin-top: 2em;
-
 }
 
 @media all and (min-width: 768px) {
@@ -17,7 +16,7 @@ div.all-list-music {
         grid-template-columns: repeat(2, 1fr);
 
         width: var(--width-rightside-768);
-        padding: 0;
+        padding: var(--padding-rule-768);
         margin-top: 3em;
         margin-left: var(--space-sidebar-768);
     }

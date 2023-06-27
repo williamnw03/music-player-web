@@ -65,7 +65,7 @@ div.list-music div.text-content p.title-music{
 div.list-music div.text-content p.artist-music{
     font-size: 0.8em;
     color: var(--dark);
-
+    
     line-height: 1em;
 }
 

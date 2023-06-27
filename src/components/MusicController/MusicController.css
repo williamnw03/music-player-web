@@ -11,8 +11,13 @@ div.music-controller {
     background-color: var(--white);
 
     width: 100vw;
-    height: (var(--controller-height-1));
+    /* height: var(--controller-height-1); */
     padding: 1.5em;
+}
+
+div.box-margin{
+    width: 50vw;
+    height: var(--controller-height-1);
 }
 
 div.music-controller div.music-controller-wrapper{
@@ -49,6 +54,7 @@ div.music-controller div.controller div.timeline-slider{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.5em;
 
     width: 100%;
@@ -100,6 +106,7 @@ div.controller-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     position: relative;
     margin-top: 1.5em;
@@ -180,16 +187,28 @@ div.controller-sound input.slider::-moz-range-thumb{
     div.music-controller {
         height: var(--controller-height-2);
     }
+    
+    div.box-margin{
+        height: var(--controller-height-2);
+    }
 }
 
 @media all and (min-height: 600px) and (min-width: 450px){
     div.music-controller {
         height: var(--controller-height-2);
     }
+
+    div.box-margin{
+        height: var(--controller-height-2);
+    }
 }
 
 @media all and (min-height: 1024px){
     div.music-controller {
+        height: var(--controller-height-3);
+    }
+
+    div.box-margin{
         height: var(--controller-height-3);
     }
 }
@@ -230,6 +249,10 @@ div.controller-sound input.slider::-moz-range-thumb{
         height: var(--controller-height-4);
 
         margin-left: var(--size-sidebar-1024);
+    }
+
+    div.box-margin{
+        height: var(--controller-height-4);
     }
 
     div.music-controller div.music-controller-wrapper{

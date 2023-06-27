@@ -64,7 +64,7 @@ function App() {
       <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
       <GenreFilter totalGenre={totalGenre} setCurrentGenre={setCurrentGenre} setData={setData}></GenreFilter>
       <AllListMusic setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} setTotalGenre={setTotalGenre}></AllListMusic>
-      <MusicController music={music} currentMusic={currentMusic}></MusicController>
+      <MusicController music={music} setMusic={setMusic} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} data={data}></MusicController>
     </div>
   );
 }

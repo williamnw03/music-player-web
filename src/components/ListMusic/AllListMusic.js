@@ -89,19 +89,21 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
     }, [])
 
     return (
-        <div className="all-list-music">
+        <>
+            <div className="all-list-music">
 
-            {data.map((e, i) => {
-                // Filter
-                if(e.searchShow){
-                    if(e.genreShow){
-                        return (
-                            <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
-                        )
+                {data.map((e, i) => {
+                    // Filter
+                    if(e.searchShow){
+                        if(e.genreShow){
+                            return (
+                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
+                            )
+                        }
                     }
-                }
-            })}
-        </div>
+                })}
+            </div>
+        </>
 
     )
 }
