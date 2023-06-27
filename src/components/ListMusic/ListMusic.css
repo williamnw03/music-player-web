@@ -67,6 +67,14 @@ div.list-music div.text-content p.artist-music{
     color: var(--dark);
     
     line-height: 1em;
+
+    hyphens: auto;
+}
+
+div.list-music div.text-content p.genre-music{
+    font-size: 0.8em;
+    font-weight: 600;
+
 }
 
 /* Playlists */
@@ -132,6 +140,31 @@ div.list-music div.playlist-button div.playlists a.playlist:first-child{
 div.list-music div.playlist-button div.playlists a.playlist:last-child{
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
+}
+
+@media all and (max-width: 300px) {
+    /* list-music */
+    div.list-music{
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Text Content */
+    div.list-music div.text-content{
+        text-align: center;
+        padding-left: 0;
+        padding: 1em;
+
+        word-break: break-all;
+    }
+
+    /* Playlists */
+    div.list-music div.playlist-button div.playlists{
+        left: -100%;
+        right: 0;
+        
+    }
 }
 
 @media all and (min-width: 768px) {

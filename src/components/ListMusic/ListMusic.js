@@ -10,6 +10,10 @@ import Playlist from "./Playlist"
 
 function ListMusic(props) {
 
+    // Artists
+    let artists = ""
+    props.data.artist.forEach((e, i) => artists += i+1 === props.data.artist.length ? e : `${e}, `)
+
     return (
         <div className="list-music" data-music-src={`../music/${props.data.fileName}`} onClick={(e) => props.changeMusic(e, props.data.fileName, props.data)}>
             <div className="image">
@@ -18,8 +22,8 @@ function ListMusic(props) {
 
             <div className="text-content">
                 <p className="title-music">{props.data.title}</p>
-                <p className="artist-music">{props.data.artist}</p>
-                <p className="artist-music">{props.data.genre}</p>
+                <p className="artist-music">{artists}</p>
+                <p className="genre-music">{props.data.genre}</p>
             </div>
 
             <div className="playlist-button">

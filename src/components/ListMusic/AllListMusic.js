@@ -36,6 +36,10 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
         setData(prev => {
             return prev.map(e => {
                 if(e.id === id) {
+                    // Close Playlists
+                    if(e.active){
+                        return {...e, active: false}
+                    }
                     return {...e, active: true}
                 } else {
                     return {...e, active: false}
