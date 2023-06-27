@@ -8,6 +8,7 @@ div.all-list-music {
 
     padding: var(--padding-rule-280);
     margin-top: 2em;
+
 }
 
 @media all and (min-width: 768px) {

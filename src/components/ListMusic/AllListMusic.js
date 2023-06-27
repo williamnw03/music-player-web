@@ -14,7 +14,7 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
         const data = await resp.json()
 
         setData(data.map(e => {
-            return {...e, active: false, show: true}
+            return {...e, active: false, genreShow: true, searchShow: true}
         }))
 
         const genres = []
@@ -92,11 +92,13 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
         <div className="all-list-music">
 
             {data.map((e, i) => {
-
-                if(e.show){
-                    return (
-                        <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
-                    )
+                // Filter
+                if(e.searchShow){
+                    if(e.genreShow){
+                        return (
+                            <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
+                        )
+                    }
                 }
             })}
         </div>

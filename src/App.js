@@ -19,13 +19,13 @@ function App() {
     "genre": [""],
     "fileName": "",
     "active": false,
-    "show": true
+    "searchShow": true,
+    "genreShow": true
   })))
 
-  // Total Genre
+  // Genre
   const [totalGenre, setTotalGenre] = useState([])
-
-  console.log(totalGenre)
+  const [currentGenre, setCurrentGenre] = useState([])
 
   // Initiat Music
   const [music, setMusic] = useState(new Audio(""))
@@ -38,7 +38,8 @@ function App() {
     "genre": [""],
     "fileName": "",
     "active": false,
-    "show": true
+    "searchShow": true,
+    "genreShow": true
   })
 
   // Seachbar
@@ -50,31 +51,18 @@ function App() {
     setData(prev => {
         return prev.map(e => {
         if(e.title.toLowerCase().includes(ev.target.value.toLowerCase())){
-          return {...e, show: true}
+          return {...e, searchShow: true}
         } else {
-          return {...e, show: false}
+          return {...e, searchShow: false}
         }
       })
     })
   }
 
-  // Genre Filter
-  const setTheGenreFilter = (ev) => {
-    setData(prev => {
-      return prev.map(e => {
-      if(e.genre.includes(ev.target.value)){
-        return {...e, show: true}
-      } else {
-        return {...e, show: false}
-      }
-    })
-  })
-  }
-
   return (
     <div className="App">
       <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
-      <GenreFilter totalGenre={totalGenre}></GenreFilter>
+      <GenreFilter totalGenre={totalGenre} setCurrentGenre={setCurrentGenre} setData={setData}></GenreFilter>
       <AllListMusic setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} setTotalGenre={setTotalGenre}></AllListMusic>
       <MusicController music={music} currentMusic={currentMusic}></MusicController>
     </div>

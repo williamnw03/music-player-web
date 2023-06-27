@@ -19,6 +19,7 @@ function ListMusic(props) {
             <div className="text-content">
                 <p className="title-music">{props.data.title}</p>
                 <p className="artist-music">{props.data.artist}</p>
+                <p className="artist-music">{props.data.genre}</p>
             </div>
 
             <div className="playlist-button">

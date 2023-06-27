@@ -13,7 +13,7 @@ import { Navigation } from "swiper"
 import "./GenreFilter.css"
 import { useEffect, useState } from "react"
 
-function GenreFilter({totalGenre}) {
+function GenreFilter({totalGenre, setCurrentGenre, setData}) {
 
     const [slidesPerView, setSlidesPerView] = useState(1)
 
@@ -43,6 +43,44 @@ function GenreFilter({totalGenre}) {
 
     // Choose Genres
     const activeGenre = (e) => {
+        let newGenres = []
+        setCurrentGenre(prev => {
+            const genre = e.target.textContent
+            if(prev.includes(genre)){
+                newGenres = prev.filter(e => {
+                    if(e !== genre) {
+                        return e
+                    }
+                })
+                return newGenres
+            } else {
+                newGenres = [...prev, e.target.textContent]
+                return newGenres
+            }
+        })
+
+        // Filter Genre
+        setData(prev => {
+
+            if(newGenres.length === 0){
+                return prev.map(e => {
+                    return {...e, genreShow: true}
+                })
+            }
+
+            return prev.map(e => {
+                let count = 0
+                e.genre.forEach(genre => {
+                    if(newGenres.includes(genre)){
+                        count++
+                    }
+                })
+                
+                return count === 0 ? {...e, genreShow: false} : {...e, genreShow: true}
+            })
+        })
+        
+
         e.target.classList.toggle("active-genre")
     }
 

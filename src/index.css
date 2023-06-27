@@ -26,4 +26,10 @@
     --padding-rule-390: 1.8em 2.4em;
     --padding-rule-768: 0;
 
+    /* Controller Height */
+    --controller-height-1: 30vh;
+    --controller-height-2: 40vh;
+    --controller-height-3: 22vh;
+    --controller-height-4: 25vh;
+
 }

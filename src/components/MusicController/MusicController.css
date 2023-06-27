@@ -11,7 +11,7 @@ div.music-controller {
     background-color: var(--white);
 
     width: 100vw;
-    height: 30vh;
+    height: (var(--controller-height-1));
     padding: 1.5em;
 }
 
@@ -178,19 +178,19 @@ div.controller-sound input.slider::-moz-range-thumb{
 
 @media all and (max-height: 480px){
     div.music-controller {
-        height: 40vh;
+        height: var(--controller-height-2);
     }
 }
 
-@media all and (min-height: 600px){
+@media all and (min-height: 600px) and (min-width: 450px){
     div.music-controller {
-        height: 40vh;
+        height: var(--controller-height-2);
     }
 }
 
 @media all and (min-height: 1024px){
     div.music-controller {
-        height: 22vh;
+        height: var(--controller-height-3);
     }
 }
 
@@ -227,7 +227,7 @@ div.controller-sound input.slider::-moz-range-thumb{
 @media all and (min-width: 1024px){
     div.music-controller {
         width: calc(100vw - var(--size-sidebar-1024));
-        height: 25vh;
+        height: var(--controller-height-4);
 
         margin-left: var(--size-sidebar-1024);
     }
