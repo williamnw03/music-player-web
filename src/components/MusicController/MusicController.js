@@ -34,6 +34,8 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
                 }
             }
         })
+
+        console.log(music)
         setMusic(prev => {
             const newAudio = prev
             newAudio.src = `./music/${music.fileName}.mp3`
@@ -76,16 +78,13 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
     }
 
     const checkMusicEnded = (e) => {
-
-        if(music.ended){
-            if(music.loop){
-                music.play()
+        if(music.loop){
+            music.play()
+        } else {
+            if(playMusic){
+                musicNextPrev(currentMusic.id, data, true, setMusic, setCurrentMusic)
             } else {
-                if(playMusic){
-                    musicNextPrev(currentMusic.id, data, true, setMusic, setCurrentMusic)
-                } else {
-                    music.pause()
-                }
+                music.pause()
             }
         }
     }
@@ -95,13 +94,7 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
         if(music.ended){
             if(music.loop){
                 music.play()
-            } else {
-                if(playMusic){
-                    musicNextPrev(currentMusic.id, data, true, setMusic, setCurrentMusic)
-                } else {
-                    music.pause()
-                }
-            }
+            } 
         } else {
             music.play()
         }
@@ -118,6 +111,16 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
             music.removeEventListener("timeupdate", checkMusicTime)
         }
     }, [])
+
+    // Music Ended
+    useEffect(() => {
+        music.removeEventListener("ended", checkMusicEnded)
+        music.addEventListener("ended", checkMusicEnded)
+
+        return () => {
+            music.removeEventListener("ended", checkMusicEnded)
+        }
+    }, [data])
 
     return (
         <>

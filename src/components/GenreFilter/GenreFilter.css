@@ -57,6 +57,13 @@ div.swiper-button-next{
     opacity: 0;
 }
 
+@media all and (max-width: 200px){
+    /* Content Box */
+    div.content-slide{
+        word-break: break-all;
+    }
+}
+
 @media all and (min-width: 375px){
     /* Content Box */
     div.content-slide{

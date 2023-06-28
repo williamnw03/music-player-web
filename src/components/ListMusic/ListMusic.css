@@ -127,7 +127,7 @@ div.list-music div.playlist-button div.playlists a.playlist{
 }
 
 div.list-music div.playlist-button div.playlists a.playlist:hover{
-    background-color: var(--dark);
+    background-color: var(--green-light);
 }
 
 
