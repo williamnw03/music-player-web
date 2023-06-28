@@ -1,16 +1,16 @@
 import { useState } from "react"
 
 // Import Font Icon
-import { HouseDoorFill, MusicNoteList, ThreeDotsVertical } from "react-bootstrap-icons"
+import { HouseDoorFill, MusicNoteList } from "react-bootstrap-icons"
 
 // Import CSS
 import "./Nav.css"
 
-function Nav({searchValue, setTheSearchValue}) {
-    const [activePlaylist, setActivePlaylist] = useState(false)
+// Import Router
+import { Link, useLocation } from "react-router-dom"
 
-    // Sidebar Active Page
-    const sidebarClick = () => setActivePlaylist(prev => !prev)
+function Nav({searchValue, setTheSearchValue}) {
+    const currentPath = useLocation()
 
     return (
         <div className="nav-padding">
@@ -20,9 +20,9 @@ function Nav({searchValue, setTheSearchValue}) {
                 </div>
 
                 <div className="navigation-section">
-                    <ul className={`${activePlaylist ? "sidebar-active-playlist" : ""}`}>
-                        <li className="home-button"> <a href="#" onClick={sidebarClick}><HouseDoorFill/></a> </li>
-                        <li className="playlist-button"> <a href="#" onClick={sidebarClick}><MusicNoteList/></a> </li>
+                    <ul className={`${currentPath.pathname !== "/" ? "sidebar-active-playlist" : ""}`}>
+                        <li className="home-button"> <Link to="/"><HouseDoorFill/></Link> </li>
+                        <li className="playlist-button"> <Link to="/playlists"><MusicNoteList/></Link> </li>
                     </ul>
                 </div>
             </nav>

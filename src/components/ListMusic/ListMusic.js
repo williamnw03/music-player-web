@@ -1,15 +1,14 @@
 // Import Font Icon
-import { useState } from "react"
 import { ThreeDotsVertical } from "react-bootstrap-icons"
 
 // Import CSS
 import "./ListMusic.css"
 
 // Import Components
-import Playlist from "./Playlist"
+import PlaylistDropdown from "./PlaylistDropdown"
 
 function ListMusic(props) {
-
+    
     // Artists
     let artists = ""
     props.data.artist.forEach((e, i) => artists += i+1 === props.data.artist.length ? e : `${e}, `)
@@ -30,9 +29,9 @@ function ListMusic(props) {
             <div className="button-playlists" onClick={() => props.munculPlaylists(props.data.id)}><ThreeDotsVertical className="button-playlists"/></div>
 
                 <div className={`playlists ${props.data.active ? "playlists-muncul" : ""}`}>
-                    <Playlist/>
-                    <Playlist/>
-                    <Playlist/>
+                    <PlaylistDropdown/>
+                    <PlaylistDropdown/>
+                    <PlaylistDropdown/>
                 </div>
             </div>
         </div>

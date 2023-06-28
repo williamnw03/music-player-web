@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState } from "react"
 
 // Import Components
 import Nav from "./components/Nav/Nav.js"
-import GenreFilter from "./components/GenreFilter/GenreFilter.js"
-import AllListMusic from "./components/ListMusic/AllListMusic.js";
-import MusicController from "./components/MusicController/MusicController.js";
+import MusicController from "./components/MusicController/MusicController.js"
+import MainPage from "./components/MainPage/MainPage.js"
+import Playlists from "./components/Playlists/Playlists.js"
+import NotFound from "./components/NotFound/NotFound.js"
 
 // Import CSS
 import './App.css';
+
+// Import Router
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App() {
   
@@ -45,6 +49,7 @@ function App() {
   // Seachbar
   const [searchValue, setSearchValue] = useState("")
 
+  // Searchbar Filter
   const setTheSearchValue = (ev) => {
     setSearchValue(ev.target.value)
 
@@ -60,12 +65,19 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
-      <GenreFilter totalGenre={totalGenre} setCurrentGenre={setCurrentGenre} setData={setData}></GenreFilter>
-      <AllListMusic setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} setTotalGenre={setTotalGenre}></AllListMusic>
-      <MusicController music={music} setMusic={setMusic} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} data={data}></MusicController>
-    </div>
+    
+    <BrowserRouter>
+          <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
+      <Routes>
+        <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre}/>}/>
+
+        <Route path="/playlists" element={<Playlists/>}/>
+
+        <Route path="*" element={<NotFound/>}></Route>
+      </Routes>
+          <MusicController music={music} setMusic={setMusic} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} data={data}></MusicController>
+    </BrowserRouter>
+    
   );
 }
 

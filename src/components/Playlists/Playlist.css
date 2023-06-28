@@ -1,0 +1,75 @@
+@import url(../../index.css);
+
+div.playlist-box {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: relative;
+    
+    background-color: var(--white);
+    border-radius: 1em;
+    padding: var(--padding-rule-280);
+
+    transition: transform 0.3s;
+
+}
+
+div.playlist-box:hover {
+
+    transform: scale(1.03);
+
+}
+
+/* Image */
+div.playlist-box div.image {
+    width: 90%;
+    line-height: 0;
+    padding-top: 1em;
+}
+
+div.playlist-box div.image img{
+    display: block;
+
+    width: 100%;
+    border-radius: 1em;
+}
+
+/* Text Content */
+div.playlist-box div.text-content p{
+    text-align: center;
+}
+
+div.playlist-box div.text-content p.title-playlist{
+    color: var(--green-dark);
+    font-weight: 600;
+    font-size: 1.2em;
+
+    padding-top: 1em;
+}
+
+/* Button */
+div.playlist-box div.playlist-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+div.playlist-box div.playlist-buttons div.playlist-button{
+    background-color: var(--white);
+    color: var(--green-dark);
+    padding: 1em;
+
+    line-height: 0;
+}
+
+div.playlist-box div.playlist-buttons div.delete-playlist{
+    border-top-left-radius: 1em;
+}
+
+div.playlist-box div.playlist-buttons div.rename-playlist{
+    border-top-right-radius: 1em;
+}
+

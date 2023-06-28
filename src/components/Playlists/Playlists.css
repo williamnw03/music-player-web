@@ -1,0 +1,32 @@
+@import url(../../index.css);
+
+div.all-playlists {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1em;
+
+
+    padding: var(--padding-rule-280);
+    margin-top: 2em;
+}
+
+@media all and (min-width: 768px) {
+    div.all-playlists {
+        gap: 1.5em;
+        grid-template-columns: repeat(2, 1fr);
+
+        width: var(--width-rightside-768);
+        padding: var(--padding-rule-768);
+        margin-top: 3em;
+        margin-left: var(--space-sidebar-768);
+    }
+}
+
+@media all and (min-width: 1024px) {
+    div.all-playlists {
+        grid-template-columns: repeat(3, 1fr);
+
+        width: var(--width-rightside-1024);
+        margin-left: var(--space-sidebar-1024);
+    }
+}
