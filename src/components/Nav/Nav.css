@@ -140,6 +140,7 @@ nav.navbar div.navigation-section ul li a:hover{
         height: 100vh;
 
         background-color: var(--white);
+        z-index: 1000;
     }
     
     nav.navbar div.navigation-section ul{

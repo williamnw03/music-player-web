@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 
 import AllListMusic from "../ListMusic/AllListMusic";
 import GenreFilter from "../GenreFilter/GenreFilter";
 
-function MainPage({setMusic, setCurrentMusic, data, setData, totalGenre, setTotalGenre, setCurrentGenre}) {
+function MainPage({setMusic, setCurrentMusic, data, setData, totalGenre, setTotalGenre, setCurrentGenre, setAlertDelete}) {
+
+    useEffect(() => {
+        setAlertDelete(false)
+    }, []);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, {useRef, useState } from 'react'
 import sanitizeHtml from "sanitize-html"
 import ContentEditable from 'react-contenteditable'
 
@@ -8,13 +8,16 @@ import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
 // Import CSS
 import "./Playlist.css"
 
-function Playlist({playlists, setPlaylists, playlist, removePlaylist}) {
+function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylistDelete}) {
 
+    const inputText = useRef(playlist.name)
     const [playlistName, setPlaylistName] = useState(playlist.name)
     const [disabledEditName, setDisabledEditName] = useState(true)
 
     // Playlist Name Change
-    const titleChange = (e, playlist, playlists, setPlaylists, playlistName) => {
+    const titleChange = (e, playlist, playlists, setPlaylists) => {
+
+        if(e.target.textContent.length > 25) return false
 
         const sanitizeConf = {
             allowedTags: [],
@@ -31,16 +34,27 @@ function Playlist({playlists, setPlaylists, playlist, removePlaylist}) {
         setPlaylists(newPlaylists)
     }
 
+    // Max Length
+    const maxLength = (e) => {
+        console.log("MASIH BELUM TAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+    }
+
     // Editable Playlist Name
     const EditStatus = () => {
         setDisabledEditName(prev => !prev)
+    }
+
+    // Alert Delete
+    const showAlertDelete = (playlist) => {
+        setAlertDelete(true)
+        setPlaylistDelete(playlist)
     }
 
     return (
         <div className="playlist-box">
 
             <div className="playlist-buttons">
-                <div className="playlist-button delete-playlist" onClick={() => removePlaylist(playlists, playlist)}>
+                <div className="playlist-button delete-playlist" onClick={() => showAlertDelete(playlist)}>
                     <Trash3Fill/>
                 </div>
 
@@ -54,7 +68,7 @@ function Playlist({playlists, setPlaylists, playlist, removePlaylist}) {
             </div>
 
             <div className="text-content">
-                <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className="title-playlist" style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists, playlistName)}/>
+                <ContentEditable ref={inputText} disabled={disabledEditName} tagName='p' html={playlistName} className="title-playlist" style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={maxLength}/>
 
                 <p className="number-playlist">#Playlist {playlist.id}</p>
             </div>

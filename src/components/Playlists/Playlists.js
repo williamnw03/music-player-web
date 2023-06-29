@@ -4,11 +4,12 @@ import { useId } from "react-id-generator";
 // Impprt Components
 import Playlist from "./Playlist"
 import EmptyPlaylist from "./EmptyPlaylist"
+import Alert from "../Alert/Alert";
 
 // Import CSS
 import "./Playlists.css"
 
-function Playlists() {
+function Playlists({alertDelete, setAlertDelete}) {
 
     // Data Playlists
     const [playlists, setPlaylists] = useState([])
@@ -62,27 +63,39 @@ function Playlists() {
         setPlaylists(newPlaylists)
     }
 
+    // Playlist to Delete
+    const [playlistDelete, setPlaylistDelete] = useState({})
+
     // Remove Playlist
-    const removePlaylist = (playlists, playlist) => {
+    const removePlaylist = (playlists, playlist, setPlaylists) => {
         const playlistID = playlist.id
         const newPlaylists = playlists.filter(playlist => playlist.id !== playlistID)
         localStorage.setItem("playlists", JSON.stringify(newPlaylists))
         setPlaylists(newPlaylists)
+        setAlertDelete(false)
+    }
+
+    // Close Alert
+    const closeAlert = () => {
+        setAlertDelete(false)
     }
 
     return (
-        <div className="playlists-wrapper">
-            <h1 className="title-page">Your Playlists</h1>
-            <p className="subtitle-page">Up to 3 Playlists</p>
-            <div className="all-playlists">
-                {
-                    playlists.length >= 1 ? playlists.map((playlist) => {
-                        return <Playlist key={playlist.id} playlists={playlists} setPlaylists={setPlaylists} playlist={playlist} removePlaylist={removePlaylist}></Playlist>
-                    }) : false
-                }
-                {playlists.length <= 2 ? <EmptyPlaylist addPlaylist={() => addPlaylist(playlists)}></EmptyPlaylist> : false}
+        <>
+            <Alert playlistDelete={playlistDelete} removePlaylist={removePlaylist} playlists={playlists} setPlaylists={setPlaylists} closeAlert={closeAlert} alertDelete={alertDelete}/>
+            <div className="playlists-wrapper">
+                <h1 className="title-page">Your Playlists</h1>
+                <p className="subtitle-page">Up to 3 Playlists</p>
+                <div className="all-playlists">
+                    {
+                        playlists.length >= 1 ? playlists.map((playlist) => {
+                            return <Playlist key={playlist.id} playlists={playlists} setPlaylists={setPlaylists} playlist={playlist} removePlaylist={removePlaylist} setAlertDelete={setAlertDelete} setPlaylistDelete={setPlaylistDelete}></Playlist>
+                        }) : false
+                    }
+                    {playlists.length <= 2 ? <EmptyPlaylist addPlaylist={() => addPlaylist(playlists)}></EmptyPlaylist> : false}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

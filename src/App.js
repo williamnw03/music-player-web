@@ -27,6 +27,9 @@ function App() {
     "genreShow": true
   })))
 
+  // Alert
+  const [alertDelete, setAlertDelete] = useState(false)
+
   // Genre
   const [totalGenre, setTotalGenre] = useState([])
   const [currentGenre, setCurrentGenre] = useState([])
@@ -68,10 +71,11 @@ function App() {
     
     <BrowserRouter>
           <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
+          <div className="black-screen" style={{opacity: alertDelete ? "0.9" : "0", visibility: alertDelete ? "visible" : "hidden"}}></div>
       <Routes>
-        <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre}/>}/>
+        <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre} setAlertDelete={setAlertDelete}/>}/>
 
-        <Route path="/playlists" element={<Playlists/>}/>
+        <Route path="/playlists" element={<Playlists alertDelete={alertDelete} setAlertDelete={setAlertDelete}/>}/>
 
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
