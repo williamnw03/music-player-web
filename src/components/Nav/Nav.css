@@ -130,7 +130,7 @@ nav.navbar div.navigation-section ul li a:hover{
     /* Navigation */
     nav.navbar div.navigation-section{
         display: flex;
-        align-items: center;
+        align-items: start;
         justify-content: center;
 
         position: fixed;

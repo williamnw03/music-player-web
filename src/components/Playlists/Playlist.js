@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState } from 'react'
+import sanitizeHtml from "sanitize-html"
+import ContentEditable from 'react-contenteditable'
 
 // Import Font Icon
 import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
@@ -6,16 +8,43 @@ import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
 // Import CSS
 import "./Playlist.css"
 
-function Playlist() {
+function Playlist({playlists, setPlaylists, playlist, removePlaylist}) {
+
+    const [playlistName, setPlaylistName] = useState(playlist.name)
+    const [disabledEditName, setDisabledEditName] = useState(true)
+
+    // Playlist Name Change
+    const titleChange = (e, playlist, playlists, setPlaylists, playlistName) => {
+
+        const sanitizeConf = {
+            allowedTags: [],
+            allowedAttributes: {}
+        }
+
+        setPlaylistName(sanitizeHtml(e.target.textContent, sanitizeConf))
+        
+        const playlistID = playlist.id
+        const newPlaylists = playlists.map(each => {
+            return each.id === playlistID ? {...each, name: sanitizeHtml(e.target.textContent, sanitizeConf)} : each
+        })
+        localStorage.setItem("playlists", JSON.stringify(newPlaylists))
+        setPlaylists(newPlaylists)
+    }
+
+    // Editable Playlist Name
+    const EditStatus = () => {
+        setDisabledEditName(prev => !prev)
+    }
+
     return (
         <div className="playlist-box">
 
             <div className="playlist-buttons">
-                <div className="playlist-button delete-playlist">
+                <div className="playlist-button delete-playlist" onClick={() => removePlaylist(playlists, playlist)}>
                     <Trash3Fill/>
                 </div>
 
-                <div className="playlist-button rename-playlist">
+                <div className="playlist-button rename-playlist" style={disabledEditName ? {} : {backgroundColor: "#055E68", color: "#F5F5F5"}} onClick={EditStatus}>
                     <PencilFill/>
                 </div>
             </div>
@@ -25,8 +54,9 @@ function Playlist() {
             </div>
 
             <div className="text-content">
-                <p className="title-playlist">Lagu2 Yang Seru</p>
-                <p className="number-playlist">#Playlist 1</p>
+                <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className="title-playlist" style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists, playlistName)}/>
+
+                <p className="number-playlist">#Playlist {playlist.id}</p>
             </div>
         </div>
     )

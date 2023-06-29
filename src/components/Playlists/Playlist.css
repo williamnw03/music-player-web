@@ -1,11 +1,13 @@
 @import url(../../index.css);
 
-div.playlist-box {
+div.playlist-box, div.empty-playlist {
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    min-height: 350px;
 
     position: relative;
     
@@ -15,12 +17,36 @@ div.playlist-box {
 
     transition: transform 0.3s;
 
+    cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.empty-playlist {
+    background-color: transparent;
+    transition: none;
 }
 
 div.playlist-box:hover {
-
     transform: scale(1.03);
+}
 
+/* Empty Playlist */
+div.empty-playlist div.add-playlist-button {
+    line-height: 0;
+}
+
+div.empty-playlist div.add-playlist-button svg {
+    font-size: 5em;
+    color: var(--white);
+    transition: transform 0.3s;
+
+}
+
+div.empty-playlist div.add-playlist-button svg:hover{
+    transform: scale(1.1);
 }
 
 /* Image */
@@ -38,6 +64,10 @@ div.playlist-box div.image img{
 }
 
 /* Text Content */
+div.playlist-box div.text-content {
+    width: 100%;
+}
+
 div.playlist-box div.text-content p{
     text-align: center;
 }
@@ -46,6 +76,13 @@ div.playlist-box div.text-content p.title-playlist{
     color: var(--green-dark);
     font-weight: 600;
     font-size: 1.2em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+    cursor: text;
 
     padding-top: 1em;
 }
@@ -63,7 +100,14 @@ div.playlist-box div.playlist-buttons div.playlist-button{
     padding: 1em;
 
     line-height: 0;
+
+    transition: background-color 0.3s;
 }
+
+div.playlist-box div.playlist-buttons div.playlist-button:hover{
+    background-color: var(--green-white);
+}
+
 
 div.playlist-box div.playlist-buttons div.delete-playlist{
     border-top-left-radius: 1em;
