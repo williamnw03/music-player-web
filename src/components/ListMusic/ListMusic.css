@@ -91,7 +91,7 @@ div.list-music div.playlist-button div.button-playlists{
     cursor: pointer;
 }
 
-div.list-music div.playlist-button div.playlists{
+div.playlists{
     position: absolute;
     top: 120%;
     right: 50%;
@@ -109,11 +109,11 @@ div.list-music div.playlist-button div.playlists{
     display: none;
 }
 
-div.list-music div.playlist-button div.playlists.playlists-muncul{
+div.playlists.playlists-muncul{
     display: block;
 }
 
-div.list-music div.playlist-button div.playlists a.playlist{
+div.playlists div.playlist{
     display: block;
 
     color: var(--white);
@@ -124,20 +124,24 @@ div.list-music div.playlist-button div.playlists a.playlist{
     padding: 1em;
 
     transition: all 0.3s;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-div.list-music div.playlist-button div.playlists a.playlist:hover{
+div.playlists div.playlist:hover{
     background-color: var(--green-light);
 }
 
 
-div.list-music div.playlist-button div.playlists a.playlist:first-child{
+div.playlists div.playlist:first-child{
     border-top: 0;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
 }
 
-div.list-music div.playlist-button div.playlists a.playlist:last-child{
+div.playlists div.playlist:last-child{
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
 }
@@ -160,7 +164,7 @@ div.list-music div.playlist-button div.playlists a.playlist:last-child{
     }
 
     /* Playlists */
-    div.list-music div.playlist-button div.playlists{
+    div.playlists{
         left: -100%;
         right: 0;
         
@@ -174,11 +178,11 @@ div.list-music div.playlist-button div.playlists a.playlist:last-child{
     }
 
     /* Playlists */
-    div.list-music div.playlist-button div.playlists{
+    div.playlists{
         min-width: 20vw;
     }
 
-    div.list-music div.playlist-button div.button-playlists{
+    div.button-playlists{
         font-size: 1.6em;
     }
 }

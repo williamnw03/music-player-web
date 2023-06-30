@@ -6,7 +6,7 @@ import ListMusic from "./ListMusic"
 import "./AllListMusic.css"
 import { useEffect, useState } from "react"
 
-function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre}) {
+function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre, playlists, setPlaylists}) {
 
     // Fetch Music
     const fetchMusic = async () => {
@@ -70,7 +70,7 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
     // Change Music
     const changeMusic = (e, fileName, data) => {
 
-        if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists")) {
+        if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists") || e.target.classList.contains("playlist")) {
             return false
         }
         setMusic(prev => {
@@ -101,7 +101,7 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre})
                     if(e.searchShow){
                         if(e.genreShow){
                             return (
-                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic}></ListMusic>
+                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic} playlists={playlists} setPlaylists={setPlaylists}></ListMusic>
                             )
                         }
                     }

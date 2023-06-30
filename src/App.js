@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // Import Components
 import Nav from "./components/Nav/Nav.js"
@@ -26,6 +26,9 @@ function App() {
     "searchShow": true,
     "genreShow": true
   })))
+
+  // Data Playlists
+  const [playlists, setPlaylists] = useState([])
 
   // Alert
   const [alertDelete, setAlertDelete] = useState(false)
@@ -67,15 +70,25 @@ function App() {
     })
   }
 
+  useEffect(() => {
+    if(!JSON.parse(localStorage.getItem("playlists"))){
+        localStorage.setItem("playlists", JSON.stringify([]))
+        setPlaylists(JSON.parse(localStorage.getItem("playlists")))
+    } else {
+        setPlaylists(JSON.parse(localStorage.getItem("playlists")))
+    }
+  }, [])
+
+
   return (
     
     <BrowserRouter>
           <Nav searchValue={searchValue} setTheSearchValue={setTheSearchValue}/>
           <div className="black-screen" style={{opacity: alertDelete ? "0.9" : "0", visibility: alertDelete ? "visible" : "hidden"}}></div>
       <Routes>
-        <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre} setAlertDelete={setAlertDelete}/>}/>
+        <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre} setAlertDelete={setAlertDelete} playlists={playlists} setPlaylists={setPlaylists}/>}/>
 
-        <Route path="/playlists" element={<Playlists alertDelete={alertDelete} setAlertDelete={setAlertDelete}/>}/>
+        <Route path="/playlists" element={<Playlists alertDelete={alertDelete} setAlertDelete={setAlertDelete} playlists={playlists} setPlaylists={setPlaylists}/>}/>
 
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>

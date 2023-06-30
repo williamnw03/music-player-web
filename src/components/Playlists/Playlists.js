@@ -9,19 +9,10 @@ import Alert from "../Alert/Alert";
 // Import CSS
 import "./Playlists.css"
 
-function Playlists({alertDelete, setAlertDelete}) {
+function Playlists({alertDelete, setAlertDelete, playlists, setPlaylists}) {
 
-    // Data Playlists
-    const [playlists, setPlaylists] = useState([])
-    
-    useEffect(() => {
-        if(!JSON.parse(localStorage.getItem("playlists"))){
-            localStorage.setItem("playlists", JSON.stringify([]))
-            setPlaylists(JSON.parse(localStorage.getItem("playlists")))
-        } else {
-            setPlaylists(JSON.parse(localStorage.getItem("playlists")))
-        }
-    }, [])
+    // Playlist to Delete
+    const [playlistDelete, setPlaylistDelete] = useState({})
 
     // Add New Playlist
     const addPlaylist = (playlists) => {
@@ -62,9 +53,6 @@ function Playlists({alertDelete, setAlertDelete}) {
         localStorage.setItem("playlists", JSON.stringify(newPlaylists))
         setPlaylists(newPlaylists)
     }
-
-    // Playlist to Delete
-    const [playlistDelete, setPlaylistDelete] = useState({})
 
     // Remove Playlist
     const removePlaylist = (playlists, playlist, setPlaylists) => {

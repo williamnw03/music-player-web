@@ -28,11 +28,13 @@ function ListMusic(props) {
             <div className="playlist-button">
             <div className="button-playlists" onClick={() => props.munculPlaylists(props.data.id)}><ThreeDotsVertical className="button-playlists"/></div>
 
-                <div className={`playlists ${props.data.active ? "playlists-muncul" : ""}`}>
-                    <PlaylistDropdown/>
-                    <PlaylistDropdown/>
-                    <PlaylistDropdown/>
-                </div>
+            <div className={`playlists ${props.data.active ? "playlists-muncul" : ""}`}>
+                {props.playlists.map((playlist) =>{
+                    return <PlaylistDropdown key={playlist.id} playlist={playlist} setPlaylists={props.setPlaylists} playlists={props.playlists} musicID={props.data.id}/>
+                })}
+            </div>
+
+
             </div>
         </div>
     )

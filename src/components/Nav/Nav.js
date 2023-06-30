@@ -15,9 +15,9 @@ function Nav({searchValue, setTheSearchValue}) {
     return (
         <div className="nav-padding">
             <nav className="navbar">
-                <div className="searchbar-section">
+                {currentPath.pathname === "/" ? <div className="searchbar-section">
                     <input type="text" className="searchbar" value={searchValue} placeholder="Search..." onChange={setTheSearchValue}/>
-                </div>
+                </div> : false}
 
                 <div className="navigation-section">
                     <ul className={`${currentPath.pathname !== "/" ? "sidebar-active-playlist" : ""}`}>
