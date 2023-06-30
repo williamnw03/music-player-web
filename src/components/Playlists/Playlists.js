@@ -30,7 +30,7 @@ function Playlists({alertDelete, setAlertDelete}) {
         const emptyPlaylist = (id) => {
             const playlist = {
                 id: id,
-                name: "New Playlist",
+                name: `New Playlist ${id}`,
                 songs: []
             }
 

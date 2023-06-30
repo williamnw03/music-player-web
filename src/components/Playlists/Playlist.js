@@ -10,33 +10,38 @@ import "./Playlist.css"
 
 function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylistDelete}) {
 
-    const inputText = useRef(playlist.name)
     const [playlistName, setPlaylistName] = useState(playlist.name)
     const [disabledEditName, setDisabledEditName] = useState(true)
 
     // Playlist Name Change
     const titleChange = (e, playlist, playlists, setPlaylists) => {
 
-        if(e.target.textContent.length > 25) return false
-
         const sanitizeConf = {
             allowedTags: [],
-            allowedAttributes: {}
+            allowedAttributes: {},
+            disallowedTagsMode: "escape"
         }
 
-        setPlaylistName(sanitizeHtml(e.target.textContent, sanitizeConf))
+        setPlaylistName(sanitizeHtml(e.target.textContent || `New Playlists ${playlist.id}`, sanitizeConf))
         
         const playlistID = playlist.id
         const newPlaylists = playlists.map(each => {
-            return each.id === playlistID ? {...each, name: sanitizeHtml(e.target.textContent, sanitizeConf)} : each
+            return each.id === playlistID ? {...each, name: sanitizeHtml(e.target.textContent || `New Playlist ${playlistID}`, sanitizeConf)} : each
         })
         localStorage.setItem("playlists", JSON.stringify(newPlaylists))
         setPlaylists(newPlaylists)
     }
 
     // Max Length
-    const maxLength = (e) => {
-        console.log("MASIH BELUM TAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+    const maxLength = (e, id) => {
+        const playlistSelected = document.querySelector(`p.playlist-no-${id}`)
+        const valueDiv = playlistSelected.textContent
+
+        if(valueDiv.length > 20){
+            playlistSelected.innerHTML = playlistName
+        } else {
+            setPlaylistName(e.target.value)
+        }
     }
 
     // Editable Playlist Name
@@ -68,10 +73,11 @@ function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylis
             </div>
 
             <div className="text-content">
-                <ContentEditable ref={inputText} disabled={disabledEditName} tagName='p' html={playlistName} className="title-playlist" style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={maxLength}/>
+                <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className={`title-playlist playlist-no-${playlist.id}`} style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={(e) => maxLength(e, playlist.id)}/>
 
                 <p className="number-playlist">#Playlist {playlist.id}</p>
             </div>
+
         </div>
     )
 }
