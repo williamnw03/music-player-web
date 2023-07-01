@@ -14,7 +14,7 @@ function ListMusic(props) {
     props.data.artist.forEach((e, i) => artists += i+1 === props.data.artist.length ? e : `${e}, `)
 
     return (
-        <div className="list-music" data-music-src={`../music/${props.data.fileName}`} onClick={(e) => props.changeMusic(e, props.data.fileName, props.data)}>
+        <div className="list-music" onClick={(e) => props.changeMusic(e, props.data.fileName, props.data)}>
             <div className="image">
                 <img src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${props.data.title}&backgroundColor=62A388`} alt="Image" />
             </div>

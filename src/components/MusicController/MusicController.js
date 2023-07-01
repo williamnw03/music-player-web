@@ -1,11 +1,13 @@
 // Import Font Icon
 import { useEffect, useState } from "react"
 import { PlayFill, PauseFill, VolumeUpFill, VolumeMuteFill, SkipStartFill, SkipEndFill, Repeat } from "react-bootstrap-icons"
+import { useLocation } from "react-router-dom"
 
 // Import CSS
 import "./MusicController.css"
 
 function MusicController({music, setMusic, currentMusic, setCurrentMusic, data}) {
+
     const [musicDuration, setMusicDuration] = useState(0)
     const [musicCurrentDuration, setMusicCurrentDuration] = useState(0)
 
@@ -37,7 +39,9 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
 
         setMusic(prev => {
             const newAudio = prev
-            newAudio.src = `./music/${music.fileName}.mp3`
+            newAudio.src = `/music/${music.fileName}.mp3`
+            console.log(newAudio)
+            console.log(newAudio.src)
             return newAudio
         }) 
         setCurrentMusic(music)

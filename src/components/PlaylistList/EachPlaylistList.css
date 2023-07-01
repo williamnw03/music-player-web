@@ -1,0 +1,122 @@
+
+/* Variables */
+:root {
+    /* Radius */
+    --card-radius-280: 0.5em;
+}
+
+/* list-music */
+div.list-music-playlist{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    
+    min-height: 5em;
+    padding: 1em;
+    border-radius: var(--card-radius-280);
+
+    color: var(--green-dark);
+
+    cursor: pointer;
+
+    transition: transform 0.3s;
+
+    background-color: var(--white);
+
+}
+
+div.list-music-playlist:hover{
+    transform: scale(1.04);
+    z-index: 500;
+}
+
+/* div.list-music-playlist:nth-child(odd){
+    background-color: var(--green-white);
+} */
+
+/* div.list-music-playlist:nth-child(even){
+    background-color: var(--white);
+} */
+
+/* Image */
+div.list-music-playlist div.image{
+    line-height: 0;
+    height: 3em;
+}
+
+
+div.list-music-playlist div.image img{
+    height: 100%;
+    border-radius: var(--card-radius-280);
+}
+
+/* Text Content */
+div.list-music-playlist div.text-content{
+    flex-grow: 1;
+    padding-left: 1em;
+}
+
+div.list-music-playlist div.text-content p.title-music{
+    line-height: 1em;
+}
+
+div.list-music-playlist div.text-content p.artist-music{
+    font-size: 0.8em;
+    color: var(--dark);
+    
+    line-height: 1em;
+
+    hyphens: auto;
+}
+
+div.list-music-playlist div.text-content p.genre-music{
+    font-size: 0.8em;
+    font-weight: 600;
+
+}
+
+/* Playlists */
+div.list-music-playlist div.delete-button{
+    position: relative;
+}
+
+div.list-music-playlist div.delete-button div.button-delete{
+    font-size: 1.4em;
+
+    line-height: 0;
+    padding: 0.4em;
+
+    cursor: pointer;
+}
+
+@media all and (max-width: 300px) {
+    /* list-music */
+    div.list-music-playlist{
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Text Content */
+    div.list-music-playlist div.text-content{
+        text-align: center;
+        padding-left: 0;
+        padding: 1em;
+
+        word-break: break-all;
+    }
+
+}
+
+@media all and (min-width: 768px) {
+    /* list-music */
+    div.list-music-playlist{
+        flex-wrap: nowrap;
+    }
+    
+    div.button-delete{
+        font-size: 1.6em;
+    }
+}

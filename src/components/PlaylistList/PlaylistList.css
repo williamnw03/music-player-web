@@ -1,0 +1,46 @@
+@import url("../../index.css");
+
+div.playlist-list-wrapper {
+    padding: var(--padding-rule-280);
+}
+
+div.all-list-music-playlist {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    gap: 1em;
+    margin-top: 1em;
+}
+
+/* Text Content */
+div.playlist-list-wrapper h1.title-page, div.playlist-list-wrapper p.subtitle-page {
+    text-align: center;
+    color: var(--white);
+}
+
+div.playlist-list-wrapper p.loop-this-playlist{
+    margin-top: 2em;
+    color: var(--white);
+    cursor: pointer;
+}
+
+@media all and (min-width: 768px) {
+    div.playlist-list-wrapper {
+        width: var(--width-rightside-768);
+        padding: var(--padding-rule-768);
+        margin-top: 3em;
+        margin-left: var(--space-sidebar-768);
+    }
+
+    div.all-list-music-playlist {
+        gap: 1.5em;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media all and (min-width: 1024px) {
+    div.playlist-list-wrapper {
+        width: var(--width-rightside-1024);
+        margin-left: var(--space-sidebar-1024);
+    }
+}

@@ -1,5 +1,10 @@
 @import url(../../index.css);
 
+a.link-playlist {
+    text-decoration: none;
+    color: var(--green-dark);
+}
+
 div.playlist-box, div.empty-playlist {
 
     display: flex;

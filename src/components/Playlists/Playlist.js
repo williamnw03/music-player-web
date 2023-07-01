@@ -7,6 +7,7 @@ import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
 
 // Import CSS
 import "./Playlist.css"
+import { Link } from 'react-router-dom'
 
 function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylistDelete}) {
 
@@ -45,40 +46,46 @@ function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylis
     }
 
     // Editable Playlist Name
-    const EditStatus = () => {
+    const EditStatus = (e) => {
+        e.preventDefault()
         setDisabledEditName(prev => !prev)
     }
 
     // Alert Delete
-    const showAlertDelete = (playlist) => {
+    const showAlertDelete = (e, playlist) => {
+        e.preventDefault()
         setAlertDelete(true)
         setPlaylistDelete(playlist)
+
     }
 
     return (
-        <div className="playlist-box">
+        
+        <Link className='link-playlist' to={`/playlists/${playlist.id}`}>
+            <div className="playlist-box">
 
-            <div className="playlist-buttons">
-                <div className="playlist-button delete-playlist" onClick={() => showAlertDelete(playlist)}>
-                    <Trash3Fill/>
+                <div className="playlist-buttons">
+                    <div className="playlist-button delete-playlist" onClick={(e) => showAlertDelete(e, playlist)} >
+                        <Trash3Fill/>
+                    </div>
+
+                    <div className="playlist-button rename-playlist" style={disabledEditName ? {} : {backgroundColor: "#055E68", color: "#F5F5F5"}} onClick={EditStatus}>
+                        <PencilFill/>
+                    </div>
                 </div>
 
-                <div className="playlist-button rename-playlist" style={disabledEditName ? {} : {backgroundColor: "#055E68", color: "#F5F5F5"}} onClick={EditStatus}>
-                    <PencilFill/>
+                <div className="image">
+                    <img src="https://api.dicebear.com/6.x/thumbs/svg?seed=Hallo&backgroundColor=62A388"/>
                 </div>
+
+                <div className="text-content">
+                    <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className={`title-playlist playlist-no-${playlist.id}`} style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={(e) => maxLength(e, playlist.id)}/>
+
+                    <p className="number-playlist">#Playlist {playlist.id}</p>
+                </div>
+
             </div>
-
-            <div className="image">
-                <img src="https://api.dicebear.com/6.x/thumbs/svg?seed=Hallo&backgroundColor=62A388"/>
-            </div>
-
-            <div className="text-content">
-                <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className={`title-playlist playlist-no-${playlist.id}`} style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={(e) => maxLength(e, playlist.id)}/>
-
-                <p className="number-playlist">#Playlist {playlist.id}</p>
-            </div>
-
-        </div>
+        </Link>
     )
 }
 

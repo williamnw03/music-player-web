@@ -8,29 +8,6 @@ import { useEffect, useState } from "react"
 
 function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre, playlists, setPlaylists}) {
 
-    // Fetch Music
-    const fetchMusic = async () => {
-        const resp = await fetch("./music-data.json")
-        const data = await resp.json()
-
-        setData(data.map(e => {
-            return {...e, active: false, genreShow: true, searchShow: true}
-        }))
-
-        const genres = []
-        data.forEach(e => {
-            e.genre.forEach(e2 => {
-                if(!genres.includes(e2)){
-                    genres.push(e2)
-                }
-            })
-        });
-
-        setTotalGenre(genres)
-
-
-    }
-
     // Show Playlists
     const munculPlaylists = (id) => {
         setData(prev => {
@@ -75,15 +52,13 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre, 
         }
         setMusic(prev => {
             const newAudio = prev
-            newAudio.src = `./music/${fileName}.mp3`
+            newAudio.src = `/music/${fileName}.mp3`
             return newAudio
         }) 
         setCurrentMusic(data)
     }
 
     useEffect(() => {
-        // Fetch Music
-        fetchMusic()
 
         document.addEventListener("click", closePlaylists)
 

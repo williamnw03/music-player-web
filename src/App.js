@@ -5,13 +5,19 @@ import Nav from "./components/Nav/Nav.js"
 import MusicController from "./components/MusicController/MusicController.js"
 import MainPage from "./components/MainPage/MainPage.js"
 import Playlists from "./components/Playlists/Playlists.js"
+import PlaylistList from "./components/PlaylistList/PlaylistList.js"
 import NotFound from "./components/NotFound/NotFound.js"
+
+import FetchDataMusic from "./components/FetchDataMusic/FetchDataMusic.js"
+
+// Import JSON DATA MUSIC
+import musicData from "./data/music-data.json"
 
 // Import CSS
 import './App.css';
 
 // Import Router
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import {BrowserRouter, Routes, Route, useLocation} from "react-router-dom"
 
 function App() {
   
@@ -71,6 +77,24 @@ function App() {
   }
 
   useEffect(() => {
+
+    // Data Music JSON
+    setData(musicData.map(e => {
+        return {...e, active: false, genreShow: true, searchShow: true}
+    }))
+
+    const genres = []
+    musicData.forEach(e => {
+        e.genre.forEach(e2 => {
+            if(!genres.includes(e2)){
+                genres.push(e2)
+            }
+        })
+    });
+
+    setTotalGenre(genres)
+
+    // Playlist 
     if(!JSON.parse(localStorage.getItem("playlists"))){
         localStorage.setItem("playlists", JSON.stringify([]))
         setPlaylists(JSON.parse(localStorage.getItem("playlists")))
@@ -89,6 +113,8 @@ function App() {
         <Route path="/" element={<MainPage setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} totalGenre={totalGenre} setTotalGenre={setTotalGenre} setCurrentGenre={setCurrentGenre} setAlertDelete={setAlertDelete} playlists={playlists} setPlaylists={setPlaylists}/>}/>
 
         <Route path="/playlists" element={<Playlists alertDelete={alertDelete} setAlertDelete={setAlertDelete} playlists={playlists} setPlaylists={setPlaylists}/>}/>
+
+        <Route path="/playlists/:playlistID" element={<PlaylistList data={data} playlists={playlists} setPlaylists={setPlaylists} setMusic={setMusic} setCurrentMusic={setCurrentMusic}/>}></Route>
 
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
