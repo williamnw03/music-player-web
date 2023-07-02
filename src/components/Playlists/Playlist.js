@@ -1,6 +1,6 @@
-import React, {useRef, useState } from 'react'
-import sanitizeHtml from "sanitize-html"
+import React, { useEffect, useState } from 'react'
 import ContentEditable from 'react-contenteditable'
+import sanitizeHtml from "sanitize-html"
 
 // Import Font Icon
 import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
@@ -9,29 +9,31 @@ import { Trash3Fill, PencilFill } from "react-bootstrap-icons"
 import "./Playlist.css"
 import { Link } from 'react-router-dom'
 
-function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylistDelete}) {
+function Playlist({playlists, playlist, changePlaylistsData, showAlertDeletePlaylist}) {
 
+    // Playlist Name
     const [playlistName, setPlaylistName] = useState(playlist.name)
+
     const [disabledEditName, setDisabledEditName] = useState(true)
 
     // Playlist Name Change
-    const titleChange = (e, playlist, playlists, setPlaylists) => {
+    const titleChange = (e, playlist, playlists) => {
 
-        const sanitizeConf = {
-            allowedTags: [],
-            allowedAttributes: {},
-            disallowedTagsMode: "escape"
-        }
+      const sanitizeConf = {
+          allowedTags: [],
+          allowedAttributes: {},
+          disallowedTagsMode: "escape"
+      }
 
-        setPlaylistName(sanitizeHtml(e.target.textContent || `New Playlists ${playlist.id}`, sanitizeConf))
-        
-        const playlistID = playlist.id
-        const newPlaylists = playlists.map(each => {
-            return each.id === playlistID ? {...each, name: sanitizeHtml(e.target.textContent || `New Playlist ${playlistID}`, sanitizeConf)} : each
-        })
-        localStorage.setItem("playlists", JSON.stringify(newPlaylists))
-        setPlaylists(newPlaylists)
-    }
+      setPlaylistName(sanitizeHtml(e.target.textContent || `New Playlists ${playlist.id}`, sanitizeConf))
+      
+      const playlistID = playlist.id
+      const newPlaylists = playlists.map(each => {
+          return each.id === playlistID ? {...each, name: sanitizeHtml(e.target.textContent || `New Playlist ${playlistID}`, sanitizeConf)} : each
+      })
+      localStorage.setItem("playlists", JSON.stringify(newPlaylists))
+      changePlaylistsData(newPlaylists)
+  }
 
     // Max Length
     const maxLength = (e, id) => {
@@ -51,12 +53,9 @@ function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylis
         setDisabledEditName(prev => !prev)
     }
 
-    // Alert Delete
-    const showAlertDelete = (e, playlist) => {
+    // Prevent Link
+    const preventLink = (e) => {
         e.preventDefault()
-        setAlertDelete(true)
-        setPlaylistDelete(playlist)
-
     }
 
     return (
@@ -65,7 +64,7 @@ function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylis
             <div className="playlist-box">
 
                 <div className="playlist-buttons">
-                    <div className="playlist-button delete-playlist" onClick={(e) => showAlertDelete(e, playlist)} >
+                    <div className="playlist-button delete-playlist" onClick={(e) => showAlertDeletePlaylist(e, playlist)} >
                         <Trash3Fill/>
                     </div>
 
@@ -79,7 +78,7 @@ function Playlist({playlists, setPlaylists, playlist, setAlertDelete, setPlaylis
                 </div>
 
                 <div className="text-content">
-                    <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className={`title-playlist playlist-no-${playlist.id}`} style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists, setPlaylists)} onChange={(e) => maxLength(e, playlist.id)}/>
+                    <ContentEditable disabled={disabledEditName} tagName='p' html={playlistName} className={`title-playlist playlist-no-${playlist.id}`} style={{backgroundColor: disabledEditName ? "transparent" : "#B9D2D2" }} onBlur={(e) => titleChange(e, playlist, playlists)} onChange={(e) => maxLength(e, playlist.id)} onClick={preventLink}/>
 
                     <p className="number-playlist">#Playlist {playlist.id}</p>
                 </div>

@@ -1,7 +1,9 @@
+import { useState } from "react";
+
 // Import CSS
 import "./Alert.css"
 
-function Alert({playlistDelete, removePlaylist, playlists, setPlaylists, closeAlert, alertDelete}) {
+function Alert({itemToDelete, playlistDelete, removePlaylist, playlists, closeAlert, alertDelete}) {
 
     return (
         <div className="alert-wrapper" style={{opacity: alertDelete ? "1" : "0", visibility: alertDelete ? "visible" : "hidden"}}>
@@ -11,7 +13,7 @@ function Alert({playlistDelete, removePlaylist, playlists, setPlaylists, closeAl
                 </div>
 
                 <div className="buttons-answer">
-                    <button className="yes-btn" onClick={() => removePlaylist(playlists, playlistDelete, setPlaylists)}>Yes</button>
+                    <button className="yes-btn" onClick={itemToDelete === "playlist" ? () => removePlaylist(playlists, playlistDelete) : false}>Yes</button>
                     <button className="no-btn" onClick={closeAlert}>No</button>
                 </div>
             </div>

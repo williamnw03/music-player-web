@@ -6,57 +6,7 @@ import ListMusic from "./ListMusic"
 import "./AllListMusic.css"
 import { useEffect, useState } from "react"
 
-function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre, playlists, setPlaylists}) {
-
-    // Show Playlists
-    const munculPlaylists = (id) => {
-        setData(prev => {
-            return prev.map(e => {
-                if(e.id === id) {
-                    // Close Playlists
-                    if(e.active){
-                        return {...e, active: false}
-                    }
-                    return {...e, active: true}
-                } else {
-                    return {...e, active: false}
-                }
-            })
-        })
-    }
-
-    // Close Playlists
-    const closePlaylists = (e) => {
-
-        if(e.target.parentElement === null) {
-            setData(prev => prev.map(e => {
-                return {...e, active: false}
-            }))
-
-            return false
-        }
-
-        if(!e.target.classList.contains("button-playlists") && !e.target.parentElement.classList.contains("button-playlists")) {
-            setData(prev => prev.map(e => {
-                return {...e, active: false}
-            }))
-        }
-
-    }
-
-    // Change Music
-    const changeMusic = (e, fileName, data) => {
-
-        if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists") || e.target.classList.contains("playlist")) {
-            return false
-        }
-        setMusic(prev => {
-            const newAudio = prev
-            newAudio.src = `/music/${fileName}.mp3`
-            return newAudio
-        }) 
-        setCurrentMusic(data)
-    }
+function AllListMusic({data, playlists, addNewMusic, munculPlaylists, closePlaylists, changeMusic}) {
 
     useEffect(() => {
 
@@ -76,7 +26,7 @@ function AllListMusic({setMusic, setCurrentMusic, data, setData, setTotalGenre, 
                     if(e.searchShow){
                         if(e.genreShow){
                             return (
-                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic} playlists={playlists} setPlaylists={setPlaylists}></ListMusic>
+                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic} playlists={playlists} addNewMusic={addNewMusic}></ListMusic>
                             )
                         }
                     }

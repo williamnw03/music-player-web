@@ -3,16 +3,14 @@ import { useEffect } from "react";
 import AllListMusic from "../ListMusic/AllListMusic";
 import GenreFilter from "../GenreFilter/GenreFilter";
 
-function MainPage({setMusic, setCurrentMusic, data, setData, totalGenre, setTotalGenre, setCurrentGenre, setAlertDelete, playlists, setPlaylists}) {
+function MainPage({data, totalGenre, setAlertDelete, playlists, activeGenre, addNewMusic, munculPlaylists, closePlaylists, changeMusic, closeTheAlert}) {
 
-    useEffect(() => {
-        setAlertDelete(false)
-    }, []);
+    useEffect(() => closeTheAlert(), []);
 
     return (
         <>
-        <GenreFilter totalGenre={totalGenre} setCurrentGenre={setCurrentGenre} setData={setData}></GenreFilter>
-        <AllListMusic setMusic={setMusic} setCurrentMusic={setCurrentMusic} data={data} setData={setData} setTotalGenre={setTotalGenre} playlists={playlists} setPlaylists={setPlaylists}></AllListMusic>
+        <GenreFilter totalGenre={totalGenre} activeGenre={activeGenre}></GenreFilter>
+        <AllListMusic data={data} playlists={playlists} addNewMusic={addNewMusic} munculPlaylists={munculPlaylists} closePlaylists={closePlaylists} changeMusic={changeMusic}></AllListMusic>
         </>
     );  
 

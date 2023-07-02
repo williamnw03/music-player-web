@@ -9,14 +9,14 @@ import "./Nav.css"
 // Import Router
 import { Link, useLocation } from "react-router-dom"
 
-function Nav({searchValue, setTheSearchValue}) {
+function Nav({searchValue, changeTheSearchValue}) {
     const currentPath = useLocation()
 
     return (
         <div className="nav-padding">
             <nav className="navbar">
                 {currentPath.pathname === "/" ? <div className="searchbar-section">
-                    <input type="text" className="searchbar" value={searchValue} placeholder="Search..." onChange={setTheSearchValue}/>
+                    <input type="text" className="searchbar" value={searchValue} placeholder="Search..." onChange={changeTheSearchValue}/>
                 </div> : false}
 
                 <div className="navigation-section">

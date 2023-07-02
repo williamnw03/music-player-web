@@ -7,30 +7,30 @@ import "./ListMusic.css"
 // Import Components
 import PlaylistDropdown from "./PlaylistDropdown"
 
-function ListMusic(props) {
+function ListMusic({data, changeMusic, munculPlaylists, playlists, addNewMusic}) {
     
     // Artists
     let artists = ""
-    props.data.artist.forEach((e, i) => artists += i+1 === props.data.artist.length ? e : `${e}, `)
+    data.artist.forEach((e, i) => artists += i+1 === data.artist.length ? e : `${e}, `)
 
     return (
-        <div className="list-music" onClick={(e) => props.changeMusic(e, props.data.fileName, props.data)}>
+        <div className="list-music" onClick={(e) => changeMusic(e, data.fileName, data)}>
             <div className="image">
-                <img src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${props.data.title}&backgroundColor=62A388`} alt="Image" />
+                <img src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${data.title}&backgroundColor=62A388`} alt="Image" />
             </div>
 
             <div className="text-content">
-                <p className="title-music">{props.data.title}</p>
+                <p className="title-music">{data.title}</p>
                 <p className="artist-music">{artists}</p>
-                <p className="genre-music">{props.data.genre}</p>
+                <p className="genre-music">{data.genre}</p>
             </div>
 
             <div className="playlist-button">
-            <div className="button-playlists" onClick={() => props.munculPlaylists(props.data.id)}><ThreeDotsVertical className="button-playlists"/></div>
+            <div className="button-playlists" onClick={() => munculPlaylists(data.id)}><ThreeDotsVertical className="button-playlists"/></div>
 
-            <div className={`playlists ${props.data.active ? "playlists-muncul" : ""}`}>
-                {props.playlists.map((playlist) =>{
-                    return <PlaylistDropdown key={playlist.id} playlist={playlist} setPlaylists={props.setPlaylists} playlists={props.playlists} musicID={props.data.id}/>
+            <div className={`playlists ${data.active ? "playlists-muncul" : ""}`}>
+                {playlists.map((playlist) =>{
+                    return <PlaylistDropdown key={playlist.id} playlist={playlist} playlists={playlists} musicID={data.id} addNewMusic={addNewMusic}/>
                 })}
             </div>
 

@@ -40,8 +40,6 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
         setMusic(prev => {
             const newAudio = prev
             newAudio.src = `/music/${music.fileName}.mp3`
-            console.log(newAudio)
-            console.log(newAudio.src)
             return newAudio
         }) 
         setCurrentMusic(music)

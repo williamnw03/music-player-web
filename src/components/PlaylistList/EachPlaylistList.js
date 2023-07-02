@@ -5,12 +5,19 @@ import { TrashFill } from "react-bootstrap-icons"
 // import CSS
 import "./EachPlaylistList.css"
 
-function EachPlaylistList({data, musicID, changeMusic}) {
+function EachPlaylistList({data, musicID, changeMusic, playlists, setPlaylists, playlistID, setAlertDelete, setPlaylistMusicDelete}) {
     const [musicSelected, setMusicSelected] = useState(data.find(e => e.id === musicID))
 
     // Artists
     let artists = ""
     musicSelected.artist.forEach((e, i) => artists += i+1 === musicSelected.artist.length ? e : `${e}, `)
+
+    // Alert Delete
+    const showAlertDelete = (e, musicID) => {
+        e.preventDefault()
+        setAlertDelete(true)
+        setPlaylistMusicDelete(musicID)
+    }
 
     return (
         <div className="list-music-playlist" onClick={(e) => changeMusic(e, musicSelected.fileName, musicSelected)}>
@@ -25,7 +32,7 @@ function EachPlaylistList({data, musicID, changeMusic}) {
             </div>
 
             <div className="delete-button">
-            <div className="button-delete"><TrashFill className="button-delete"/></div>
+            <div className="button-delete"><TrashFill className="button-delete" onClick={(e) => showAlertDelete(e, musicID)}/></div>
 
             </div>
         </div>
