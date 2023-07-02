@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 // Import Font Icon
 import { Repeat } from "react-bootstrap-icons"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 // Import Components
 import EachPlaylistList from "./EachPlaylistList"
@@ -11,72 +11,56 @@ import Alert from "../Alert/Alert"
 // Import CSS
 import "./PlaylistList.css"
 
-function PlaylistList({data, playlists, setPlaylists, setMusic, setCurrentMusic, alertDelete, setAlertDelete}) {
+function PlaylistList({data, playlists, changeMusicInPlaylist, showAlertDeleteMusicInPlaylist, removeMusicInPlaylist, closeAlert, alertDelete, changeAlertDelete}) {
+
+    const navigate = useNavigate()
 
     const {playlistID} = useParams()
 
     const [dataPlaylist, setDataPlaylist] = useState([])
 
-    const [playlistMusicDelete, setPlaylistMusicDelete] = useState(-1)
+    // Music in PLaylist to Delete
+    const [musicInPlaylistDelete, setMusicInPlaylistDelete] = useState(-1)
+
+    const changeMusicInPlaylistDelete = (musicID) => {
+        setMusicInPlaylistDelete(musicID)
+    }
 
     useEffect(() => {
 
+        const playlistsDataLocalstorage = JSON.parse(localStorage.getItem("playlists"))
+        console.log("LEWAT")
+        console.log(playlistsDataLocalstorage[0])
+
         let currentPlaylist = {}
 
-        if(playlists.length !== 0) {
-            playlists.forEach(e => {
+        if(playlistsDataLocalstorage.length !== 0) {
+
+            if(!playlistsDataLocalstorage.find(playlist => playlist.id == playlistID)){
+                navigate("/playlists")
+            }
+
+            playlistsDataLocalstorage.forEach(e => {
                 if(e.id == playlistID){
                     currentPlaylist = e
                 }
             })
+
+            console.log(currentPlaylist)
     
             setDataPlaylist(currentPlaylist.songs)
+        } else {
+            navigate("/playlists")
         }
 
     }, [playlists])
 
-    // Change Music
-    const changeMusic = (e, fileName, data) => {
-
-        if(e.target.classList.contains("button-delete") || e.target.parentElement.classList.contains("button-delete")) {
-            return false
-        }
-
-        setMusic(prev => {
-            const newAudio = prev
-            newAudio.src = `/music/${fileName}.mp3`
-            return newAudio
-        }) 
-        setCurrentMusic(data)
-    }
-
-    // Remove Music
-    const removeMusic = (playlist, setPlaylists, playlists, musicID) => {
-        const newPlaylists = [...playlists];
-
-        const newestPlaylists = newPlaylists.map(each => {
-            const newPlaylist = {...each}
-
-            if(newPlaylist.id === playlist.id) {
-                newPlaylist.songs.splice(newPlaylist.songs.indexOf(musicID), 1);   
-            }
-
-            return newPlaylist;
-        })
-
-        setPlaylists(newestPlaylists)
-        localStorage.setItem('playlists', JSON.stringify(newestPlaylists))
-    }
-
-    // Close Alert
-    const closeAlert = (setAlertDelete) => {
-        setAlertDelete(false)
-    }
+    console.log(dataPlaylist.length)
 
     return (
     <>
-        {/* <Alert itemToDelete={"music-playlist"} playlistMusicDelete={playlistMusicDelete} removeMusic={removeMusic} playlists={playlists} setPlaylists={setPlaylists} closeAlert={closeAlert} alertDelete={alertDelete} setAlertDelete={setAlertDelete} playlistID={playlistID}/> */}
-        
+        <Alert itemToDelete={"music-playlist"} musicInPlaylistDelete={musicInPlaylistDelete} removeMusicInPlaylist={removeMusicInPlaylist} playlists={playlists} closeAlert={closeAlert} alertDelete={alertDelete} playlistID={playlistID}/>
+
         <div className="playlist-list-wrapper">
             <h1 className="title-page">Your Playlists</h1>
             <p className="subtitle-page">Up to 3 Playlists</p>
@@ -87,7 +71,7 @@ function PlaylistList({data, playlists, setPlaylists, setMusic, setCurrentMusic,
 
                     // Filter
                     return (
-                        <EachPlaylistList key={i} data={data} musicID={e} changeMusic={changeMusic} playlists={playlists} setPlaylists={setPlaylists} playlistID={playlistID} setAlertDelete={setAlertDelete} setPlaylistMusicDelete={setPlaylistMusicDelete}></EachPlaylistList>
+                        <EachPlaylistList key={i} data={data} musicID={e} changeMusicInPlaylist={changeMusicInPlaylist} playlists={playlists} showAlertDeleteMusicInPlaylist={showAlertDeleteMusicInPlaylist} changeAlertDelete={changeAlertDelete} changeMusicInPlaylistDelete={changeMusicInPlaylistDelete}></EachPlaylistList>
                     )
 
                 })}

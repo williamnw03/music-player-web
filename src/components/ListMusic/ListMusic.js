@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 // Import Font Icon
 import { ThreeDotsVertical } from "react-bootstrap-icons"
 
@@ -29,9 +31,9 @@ function ListMusic({data, changeMusic, munculPlaylists, playlists, addNewMusic})
             <div className="button-playlists" onClick={() => munculPlaylists(data.id)}><ThreeDotsVertical className="button-playlists"/></div>
 
             <div className={`playlists ${data.active ? "playlists-muncul" : ""}`}>
-                {playlists.map((playlist) =>{
+                {playlists.length ? playlists.map((playlist) =>{
                     return <PlaylistDropdown key={playlist.id} playlist={playlist} playlists={playlists} musicID={data.id} addNewMusic={addNewMusic}/>
-                })}
+                }) : <div className="playlist" style={{backgroundColor:"maroon"}}> {<Link className="playlist" to="/playlists" style={{color:"#F5F5F5", textDecoration:"none"}}>Create your playlist first</Link>}</div>}
             </div>
 
 

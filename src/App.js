@@ -117,8 +117,8 @@ function App() {
     e.target.classList.toggle("active-genre")
   }
 
-  // Add New Music to Playlist
-  const addNewMusic = (playlist, playlists, musicID) => {
+    // Add New Music to Playlist
+    const addNewMusic = (playlist, playlists, musicID) => {
     const newPlaylists = [...playlists];
 
     const newestPlaylists = newPlaylists.map(each => {
@@ -138,7 +138,38 @@ function App() {
 
     setPlaylists(newestPlaylists)
     localStorage.setItem('playlists', JSON.stringify(newestPlaylists))
-  }
+    }
+
+    // Delete Music in Playlist
+    const removeMusicInPlaylist = (playlists, playlist, musicID) => {
+
+        const newPlaylists = [...playlists];
+
+        const newestPlaylists = newPlaylists.map(each => {
+            const newPlaylist = {...each}
+            if(newPlaylist.id === playlist.id) {
+    
+                if(newPlaylist.songs.find(song => song === musicID)) {
+                    newPlaylist.songs.splice(newPlaylist.songs.indexOf(musicID), 1);  
+                }
+            }
+    
+            return newPlaylist;
+        })
+        
+        localStorage.setItem('playlists', JSON.stringify(newestPlaylists))
+        setPlaylists(newestPlaylists)
+        setAlertDelete(false)
+
+    }
+
+    const changeAlertDelete = () => {
+        setAlertDelete(true)
+
+    }
+
+
+  
 
   // Show Playlists
   const munculPlaylists = (id) => {
@@ -176,21 +207,33 @@ function App() {
 
   }
 
-  // Change Music
-  const changeMusic = (e, fileName, data) => {
+    const changeMusicTemplate = (fileName, data) => {
+        setMusic(prev => {
+            const newAudio = prev
+            newAudio.src = `/music/${fileName}.mp3`
+            return newAudio
+        }) 
+        setCurrentMusic(data)
+    }
 
-      if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists") || e.target.classList.contains("playlist")) {
-          return false
-      }
-      setMusic(prev => {
-          const newAudio = prev
-          newAudio.src = `/music/${fileName}.mp3`
-          return newAudio
-      }) 
-      setCurrentMusic(data)
-  }
+    // Change Music
+    const changeMusic = (e, fileName, data) => {
 
+        if(e.target.classList.contains("button-playlists") || e.target.parentElement.classList.contains("button-playlists") || e.target.classList.contains("playlist")) {
+            return false
+        }
+        changeMusicTemplate(fileName, data)
+    }
 
+    // Change Music In Playlist
+    const changeMusicInPlaylist = (e, fileName, data) => {
+
+        if(e.target.classList.contains("button-delete") || e.target.parentElement.classList.contains("button-delete")) {
+            return false
+        }
+
+        changeMusicTemplate(fileName, data)
+    }
 
 
 
@@ -201,12 +244,10 @@ function App() {
     setPlaylists(newData)
   }
 
-  // Delete Music
-
   // Playlist to Delete
   const [playlistDelete, setPlaylistDelete] = useState({})
   
-  // Alert Delete
+  // Alert Delete Playlist
   const showAlertDeletePlaylist = (e, playlist) => {
       e.preventDefault()
       setAlertDelete(true)
@@ -254,20 +295,19 @@ function App() {
       setPlaylists(newPlaylists)
   }
 
-  // Remove Playlist
-  const removePlaylist = (playlists, playlist) => {
-      const playlistID = playlist.id
-      const newPlaylists = playlists.filter(playlist => playlist.id !== playlistID)
-      localStorage.setItem("playlists", JSON.stringify(newPlaylists))
-      setPlaylists(newPlaylists)
-      setAlertDelete(false)
-  }
+    // Remove Playlist
+    const removePlaylist = (playlists, playlist) => {
+        const playlistID = playlist.id
+        const newPlaylists = playlists.filter(playlist => playlist.id !== playlistID)
+        localStorage.setItem("playlists", JSON.stringify(newPlaylists))
+        setPlaylists(newPlaylists)
+        setAlertDelete(false)
+    }
 
-  // Close Alert
-  const closeAlert = () => {
-    console.log("JADI FALSE")
-      setAlertDelete(false)
-  }
+    // Close Alert
+    const closeAlert = () => {
+        setAlertDelete(false)
+    }
 
 
 
@@ -320,7 +360,7 @@ function App() {
 
         <Route path="/playlists" element={<Playlists alertDelete={alertDelete} playlists={playlists} changePlaylistsData={changePlaylistsData} addPlaylist={addPlaylist} removePlaylist={removePlaylist} closeAlert={closeAlert} playlistDelete={playlistDelete} showAlertDeletePlaylist={showAlertDeletePlaylist}/>} />
 
-        <Route path="/playlists/:playlistID" element={<PlaylistList data={data} playlists={playlists} setPlaylists={setPlaylists} setMusic={setMusic} setCurrentMusic={setCurrentMusic} alertDelete={alertDelete} setAlertDelete={setAlertDelete}/>}></Route>
+        <Route path="/playlists/:playlistID" element={<PlaylistList data={data} playlists={playlists} changeMusicInPlaylist={changeMusicInPlaylist} removeMusicInPlaylist={removeMusicInPlaylist} closeAlert={closeAlert} alertDelete={alertDelete} changeAlertDelete={changeAlertDelete}/>}></Route>
 
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
