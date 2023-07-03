@@ -22,8 +22,6 @@ function EachPlaylistList({
     data.find((e) => e.id == musicID)
   );
 
-  // console.log(musicSelected)
-
   // Artists
   let artists = "";
   musicSelected.artist.forEach(

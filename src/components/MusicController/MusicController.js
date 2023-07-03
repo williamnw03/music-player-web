@@ -81,9 +81,6 @@ function MusicController({
 
   const durationProgress = () => {
     const slider = document.querySelector("div.timeline-slider input.slider");
-    console.log(
-      Math.ceil((parseFloat(slider.value) / parseFloat(slider.max)) * 100)
-    );
     slider.style.setProperty(
       "--progress-slider",
       `${Math.ceil((parseFloat(slider.value) / parseFloat(slider.max)) * 100)}%`
