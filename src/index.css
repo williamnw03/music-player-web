@@ -1,35 +1,39 @@
 /* Variables */
 :root {
+  /* Colors */
+  --dark: #343434;
+  --green-dark: #055e68;
+  --green-light: #62a388;
+  --green-white: #b9d2d2;
+  --white: #f5f5f5;
 
-    /* Colors */
-    --dark: #343434;
-    --green-dark: #055E68;
-    --green-light: #62A388;
-    --green-white: #B9D2D2;
-    --white: #F5F5F5;
+  /* Size Sidebar */
+  --size-sidebar-768: 8vw;
+  --size-sidebar-1024: 6vw;
 
-    /* Size Sidebar */
-    --size-sidebar-768: 8vw;
-    --size-sidebar-1024: 6vw;
+  /* Space Sidebar */
+  --space-sidebar-768: calc(var(--size-sidebar-768) + 10vw);
+  --space-sidebar-1024: calc(var(--size-sidebar-1024) + 4vw);
 
-    /* Space Sidebar */
-    --space-sidebar-768: calc(var(--size-sidebar-768) + 10vw);
-    --space-sidebar-1024: calc(var(--size-sidebar-1024) + 4vw);
+  /* Width for Rightside */
+  --width-rightside-768: calc(100vw - var(--size-sidebar-768) - 20vw);
+  --width-rightside-1024: calc(100vw - var(--size-sidebar-1024) - 8vw);
 
-    /* Width for Rightside */
-    --width-rightside-768: calc(100vw - var(--size-sidebar-768) - 20vw);
-    --width-rightside-1024: calc(100vw - var(--size-sidebar-1024) - 8vw);
+  /* Padding */
+  --padding-rule-280: 0.8em;
+  --padding-rule-320: 0.8em 2em;
+  --padding-rule-390: 1.8em 2.4em;
+  --padding-rule-768: 1em 1em 2em 1em;
 
-    /* Padding */
-    --padding-rule-280: 0.8em;
-    --padding-rule-320: 0.8em 2em;
-    --padding-rule-390: 1.8em 2.4em;
-    --padding-rule-768: 1em;
+  /* Controller Height */
+  --controller-height-1: 30vh;
+  --controller-height-2: 40vh;
+  --controller-height-3: 22vh;
+  --controller-height-4: 25vh;
 
-    /* Controller Height */
-    --controller-height-1: 30vh;
-    --controller-height-2: 40vh;
-    --controller-height-3: 22vh;
-    --controller-height-4: 25vh;
+  /* Porgress slider */
+  --progress-slider: 0;
 
+  /* Progress Slider Volume */
+  --progress-slider-volume: 100%;
 }

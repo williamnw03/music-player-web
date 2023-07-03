@@ -1,44 +1,65 @@
 // Import Font Icon
 import { useState } from "react";
-import { TrashFill } from "react-bootstrap-icons"
+import { TrashFill } from "react-bootstrap-icons";
 
 // import CSS
-import "./EachPlaylistList.css"
+import "./EachPlaylistList.css";
 
-function EachPlaylistList({data, musicID, changeMusicInPlaylist, changeAlertDelete, changeMusicInPlaylistDelete}) {
+function EachPlaylistList({
+  data,
+  musicID,
+  changeMusicInPlaylist,
+  changeAlertDelete,
+  changeMusicInPlaylistDelete,
+}) {
+  // Alert Delete Music in Playlist
+  const showAlertDeleteMusicInPlaylist = (musicID) => {
+    changeAlertDelete();
+    changeMusicInPlaylistDelete(musicID);
+  };
 
-    // Alert Delete Music in Playlist
-    const showAlertDeleteMusicInPlaylist = (musicID) => {
-        changeAlertDelete()
-        changeMusicInPlaylistDelete(musicID)
-    }
+  const [musicSelected, setMusicSelected] = useState(
+    data.find((e) => e.id == musicID)
+  );
 
-    const [musicSelected, setMusicSelected] = useState(data.find(e => e.id == musicID))
+  // console.log(musicSelected)
 
-    // console.log(musicSelected)
+  // Artists
+  let artists = "";
+  musicSelected.artist.forEach(
+    (e, i) => (artists += i + 1 === musicSelected.artist.length ? e : `${e}, `)
+  );
 
-    // Artists
-    let artists = ""
-    musicSelected.artist.forEach((e, i) => artists += i+1 === musicSelected.artist.length ? e : `${e}, `)
+  return (
+    <div
+      className="list-music-playlist"
+      onClick={(e) =>
+        changeMusicInPlaylist(e, musicSelected.fileName, musicSelected)
+      }
+    >
+      <div className="image">
+        <img
+          src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${musicSelected.title}&backgroundColor=62A388`}
+          alt={musicSelected.title}
+        />
+      </div>
 
-    return (
-        <div className="list-music-playlist" onClick={(e) => changeMusicInPlaylist(e, musicSelected.fileName, musicSelected)}>
-            <div className="image">
-                <img src={`https://api.dicebear.com/6.x/thumbs/svg?seed=${musicSelected.title}&backgroundColor=62A388`} alt="Image" />
-            </div>
+      <div className="text-content">
+        <p className="title-music">{musicSelected.title}</p>
+        <p className="artist-music">{artists}</p>
+        <p className="genre-music">{musicSelected.genre}</p>
+      </div>
 
-            <div className="text-content">
-                <p className="title-music">{musicSelected.title}</p>
-                <p className="artist-music">{artists}</p>
-                <p className="genre-music">{musicSelected.genre}</p>
-            </div>
-
-            <div className="delete-button">
-            <div className="button-delete"><TrashFill className="button-delete" onClick={() => showAlertDeleteMusicInPlaylist(musicSelected.id)}/></div>
-
-            </div>
+      <div className="delete-button">
+        <div className="button-delete">
+          <TrashFill
+            className="button-delete"
+            onClick={() => showAlertDeleteMusicInPlaylist(musicSelected.id)}
+          />
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default EachPlaylistList;

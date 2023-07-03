@@ -1,40 +1,60 @@
-
 // Import Components
-import ListMusic from "./ListMusic"
+import ListMusic from "./ListMusic";
 
 // Import CSS
-import "./AllListMusic.css"
-import { useEffect, useState } from "react"
+import "./AllListMusic.css";
+import { useEffect } from "react";
 
-function AllListMusic({data, playlists, addNewMusic, munculPlaylists, closePlaylists, changeMusic}) {
+function AllListMusic({
+  data,
+  playlists,
+  addNewMusic,
+  munculPlaylists,
+  closePlaylists,
+  changeMusic,
+}) {
+  const dataSongs = data.map((e, i) => {
+    // Filter
+    if (e.searchShow && e.genreShow) {
+      return (
+        <ListMusic
+          key={i}
+          munculPlaylists={munculPlaylists}
+          data={e}
+          changeMusic={changeMusic}
+          playlists={playlists}
+          addNewMusic={addNewMusic}
+        ></ListMusic>
+      );
+    }
+  });
 
-    useEffect(() => {
+  useEffect(() => {
+    document.addEventListener("click", closePlaylists);
 
-        document.addEventListener("click", closePlaylists)
+    return () => {
+      document.removeEventListener("click", closePlaylists);
+    };
+  }, []);
 
-        return () => {
-            document.removeEventListener("click", closePlaylists)
-        }
-    }, [])
-
-    return (
-        <>
-            <div className="all-list-music">
-
-                {data.map((e, i) => {
-                    // Filter
-                    if(e.searchShow){
-                        if(e.genreShow){
-                            return (
-                                <ListMusic key={i} munculPlaylists={munculPlaylists} data={e} changeMusic={changeMusic} playlists={playlists} addNewMusic={addNewMusic}></ListMusic>
-                            )
-                        }
-                    }
-                })}
-            </div>
-        </>
-
-    )
+  return (
+    <>
+      {dataSongs.filter((each) => each === undefined).length ===
+      dataSongs.length ? (
+        <h1 style={{ color: "#f5f5f5", textAlign: "center", marginTop: "2em" }}>
+          NOT FOUND
+        </h1>
+      ) : (
+        false
+      )}
+      <div className="all-list-music">
+        {dataSongs.filter((each) => each === undefined).length ===
+        dataSongs.length
+          ? false
+          : dataSongs}
+      </div>
+    </>
+  );
 }
 
-export default AllListMusic
+export default AllListMusic;

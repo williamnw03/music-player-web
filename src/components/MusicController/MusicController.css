@@ -1,304 +1,346 @@
+@import url("../../index.css");
+
 div.music-controller {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    position: fixed;
-    z-index: 1000;
-    top: 100vh;
-    transform: translateY(-100%);
+  position: fixed;
+  z-index: 1000;
+  top: 100vh;
+  transform: translateY(-100%);
 
-    background-color: var(--white);
+  background-color: var(--white);
 
-    width: 100vw;
-    /* height: var(--controller-height-1); */
-    padding: 1.5em;
+  width: 100vw;
+  /* height: var(--controller-height-1); */
+  padding: 1.5em;
 }
 
-div.box-margin{
-    width: 50vw;
-    height: var(--controller-height-1);
+div.box-margin {
+  width: 50vw;
+  height: var(--controller-height-1);
 }
 
-div.music-controller div.music-controller-wrapper{
-    width: 100%;
+div.music-controller div.music-controller-wrapper {
+  width: 100%;
 }
 
 /* Text Content */
-div.music-controller div.text-content{
-    text-align: center;
+div.music-controller div.text-content {
+  text-align: center;
 
-    color: var(--green-dark);
+  color: var(--green-dark);
 }
 
-div.music-controller div.text-content h3{
-    font-weight: 600;
+div.music-controller div.text-content h3 {
+  font-weight: 600;
 }
 
-div.music-controller div.text-content p{
-    line-height: 1em;
-    color: var(--dark);
+div.music-controller div.text-content p {
+  line-height: 1em;
+  color: var(--dark);
 
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
-div.music-controller div.music-controller-wrapper div.controller{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+div.music-controller div.text-content p.playlist-playing {
+  margin-top: 0.5em;
+  color: var(--green-dark);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+div.music-controller div.music-controller-wrapper div.controller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Timeline Slider */
-div.music-controller div.controller div.timeline-slider{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5em;
+div.music-controller div.controller div.timeline-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
 
-    width: 100%;
+  width: 100%;
 
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
-div.music-controller div.controller div.timeline-slider p{
-    font-size: 0.6em;
+div.music-controller div.controller div.timeline-slider p {
+  font-size: 0.6em;
 }
 
-div.music-controller div.controller div.timeline-slider input.slider{
-    flex-grow: 1;
+div.music-controller div.controller div.timeline-slider input.slider {
+  position: relative;
 
-    appearance: none;
-    height: 0.2em;
+  flex-grow: 1;
 
-    border-radius: 0.2em;
+  appearance: none;
+  height: 0.2em;
 
-    background-color: var(--green-dark);   
+  border-radius: 0.2em;
+
+  background-color: var(--green-dark);
 }
 
-div.music-controller div.controller div.timeline-slider input.slider::-webkit-slider-thumb{
-    appearance: none;
-
-    cursor: pointer;
-
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-
-    background-color: var(--green-white);
+div.music-controller div.controller div.timeline-slider input.slider::before {
+  position: absolute;
+  content: "";
+  top: -50%;
+  left: 0;
+  width: var(--progress-slider);
+  height: 0.4em;
+  background-color: var(--green-white);
+  cursor: pointer;
 }
 
-div.music-controller div.controller div.timeline-slider input.slider::-moz-range-thumb{
-    appearance: none;
+div.music-controller
+  div.controller
+  div.timeline-slider
+  input.slider::-webkit-slider-thumb {
+  appearance: none;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
 
-    background-color: var(--green-white);
+  background-color: var(--green-white);
+  position: relative;
+}
+
+div.music-controller
+  div.controller
+  div.timeline-slider
+  input.slider::-moz-range-thumb {
+  appearance: none;
+
+  cursor: pointer;
+
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+
+  background-color: var(--green-white);
+  position: relative;
 }
 
 /* Controller Button */
 div.controller-button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 
-    position: relative;
-    margin-top: 1.5em;
+  position: relative;
+  margin-top: 1.5em;
 
-    width: 100%;
+  width: 100%;
 }
 
-div.controller-button button{
-    background-color: transparent;
-    border: none;
-    padding: 0.5em;
+div.controller-button button {
+  background-color: transparent;
+  border: none;
+  padding: 0.5em;
 
-    line-height: 0;
+  line-height: 0;
 
-    font-size: 1.5em;
-    color: var(--green-dark);
+  font-size: 1.5em;
+  color: var(--green-dark);
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Controller Sound */
-div.controller-sound{
+div.controller-sound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+
+  background-color: var(--dark);
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+
+div.controller-sound input.slider {
+  appearance: none;
+  height: 0.2em;
+
+  border-radius: 0.2em;
+
+  background-color: var(--white);
+
+  position: relative;
+}
+
+div.controller-sound input.slider::before {
+  position: absolute;
+  content: "";
+  top: -50%;
+  left: 0;
+  width: var(--progress-slider-volume);
+  height: 0.3em;
+  background-color: var(--green-white);
+  cursor: pointer;
+}
+
+div.controller-sound {
+  display: none;
+}
+
+div.controller-sound.muncul {
+  display: flex;
+}
+
+div.controller-sound input.slider::-webkit-slider-thumb {
+  appearance: none;
+
+  cursor: pointer;
+
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+
+  background-color: var(--green-white);
+
+  position: relative;
+}
+
+div.controller-sound input.slider::-moz-range-thumb {
+  appearance: none;
+
+  cursor: pointer;
+
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+
+  background-color: var(--green-white);
+}
+
+@media all and (max-height: 480px) {
+  div.music-controller {
+    height: var(--controller-height-2);
+  }
+
+  div.box-margin {
+    height: var(--controller-height-2);
+  }
+}
+
+@media all and (min-height: 600px) and (min-width: 450px) {
+  div.music-controller {
+    height: var(--controller-height-2);
+  }
+
+  div.box-margin {
+    height: var(--controller-height-2);
+  }
+}
+
+@media all and (min-height: 1024px) {
+  div.music-controller {
+    height: var(--controller-height-3);
+  }
+
+  div.box-margin {
+    height: var(--controller-height-3);
+  }
+}
+
+@media all and (min-width: 414px) {
+  /* Text Content */
+  div.music-controller div.text-content h3 {
+    font-size: 1.5em;
+  }
+
+  div.music-controller div.text-content p {
+    font-size: 1em;
+  }
+
+  /* Timeline Slider */
+  div.music-controller div.controller div.timeline-slider p {
+    font-size: 0.8em;
+  }
+
+  /* Controller Button */
+  div.controller-button button {
+    font-size: 2em;
+  }
+}
+
+@media all and (min-width: 768px) {
+  div.music-controller {
+    width: calc(100vw - var(--size-sidebar-768));
+
+    margin-left: var(--size-sidebar-768);
+  }
+}
+
+@media all and (min-width: 1024px) {
+  div.music-controller {
+    width: calc(100vw - var(--size-sidebar-1024));
+    height: var(--controller-height-4);
+
+    margin-left: var(--size-sidebar-1024);
+  }
+
+  div.box-margin {
+    height: var(--controller-height-4);
+  }
+
+  div.music-controller div.music-controller-wrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8em;
+  }
+
+  /* Text Content */
+  div.music-controller div.text-content {
+    position: absolute;
+    left: 0;
+
+    margin-left: 3vw;
+
+    text-align: left;
+
+    width: 20vw;
+  }
+
+  div.music-controller div.text-content h3 {
+    font-size: 1.3em;
+  }
+
+  /* Timeline Slider */
+  div.music-controller div.controller div.timeline-slider input.slider {
+    width: 30em;
+  }
+
+  /* Controller Button */
+  div.controller-button {
+    width: auto;
+  }
+
+  /* Controller Sound */
+  div.controller-sound {
+    display: none;
     justify-content: center;
     align-items: center;
 
     position: absolute;
-    top: 0;
-    transform: translateY(-100%);
-
-    background-color: var(--dark);
-    padding: 0.5em;
-    border-radius: 0.5em;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+  }
 }
-
-div.controller-sound input.slider{
-    appearance: none;
-    height: 0.2em;
-
-    border-radius: 0.2em;
-
-    background-color: var(--white);
-}
-
-div.controller-sound{
-    display: none;
-}
-
-div.controller-sound.muncul{
-    display: flex;
-}
-
-div.controller-sound input.slider::-webkit-slider-thumb{
-    appearance: none;
-
-    cursor: pointer;
-
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-
-    background-color: var(--green-white);
-}
-
-div.controller-sound input.slider::-moz-range-thumb{
-    appearance: none;
-
-    cursor: pointer;
-
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-
-    background-color: var(--green-white);
-}
-
-@media all and (max-height: 480px){
-    div.music-controller {
-        height: var(--controller-height-2);
-    }
-    
-    div.box-margin{
-        height: var(--controller-height-2);
-    }
-}
-
-@media all and (min-height: 600px) and (min-width: 450px){
-    div.music-controller {
-        height: var(--controller-height-2);
-    }
-
-    div.box-margin{
-        height: var(--controller-height-2);
-    }
-}
-
-@media all and (min-height: 1024px){
-    div.music-controller {
-        height: var(--controller-height-3);
-    }
-
-    div.box-margin{
-        height: var(--controller-height-3);
-    }
-}
-
-@media all and (min-width: 414px){
-
-    /* Text Content */
-    div.music-controller div.text-content h3{
-        font-size: 1.5em;
-    }
-
-    div.music-controller div.text-content p{
-        font-size: 1em;
-    }
-
-    /* Timeline Slider */
-    div.music-controller div.controller div.timeline-slider p{
-        font-size: 0.8em;
-    }
-
-    /* Controller Button */
-    div.controller-button button{
-        font-size: 2em;
-    }
-}
-
-@media all and (min-width: 768px){
-    div.music-controller {
-        width: calc(100vw - var(--size-sidebar-768));
-
-        margin-left: var(--size-sidebar-768);
-    }
-}
-
-@media all and (min-width: 1024px){
-    div.music-controller {
-        width: calc(100vw - var(--size-sidebar-1024));
-        height: var(--controller-height-4);
-
-        margin-left: var(--size-sidebar-1024);
-    }
-
-    div.box-margin{
-        height: var(--controller-height-4);
-    }
-
-    div.music-controller div.music-controller-wrapper{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8em;
-    }
-
-    /* Text Content */
-    div.music-controller div.text-content{
-        position: absolute;
-        left: 0;
-
-        margin-left: 3vw;
-
-        text-align: left;
-
-        width: 20vw;
-    }
-
-    div.music-controller div.text-content h3{
-        font-size: 1.3em;
-    }
-
-    /* Timeline Slider */
-    div.music-controller div.controller div.timeline-slider input.slider{
-        width: 30em;
-    }
-
-    /* Controller Button */
-    div.controller-button {
-        width: auto;
-    }
-
-    /* Controller Sound */
-    div.controller-sound{
-        display: none;
-        justify-content: center;
-        align-items: center;
-
-        position: absolute;
-        top: 50%;
-        right: 100%;
-        transform: translateY(-50%);
-    }
-
-}
-

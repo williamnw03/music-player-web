@@ -1,0 +1,26 @@
+@import url("../../index.css");
+
+div.not-found-page {
+  padding: var(--padding-rule-280);
+  margin-top: 2em;
+  color: var(--white);
+  text-align: center;
+  font-size: 1em;
+  word-break: break-all;
+}
+
+@media all and (min-width: 768px) {
+  div.not-found-page {
+    width: var(--width-rightside-768);
+    padding: var(--padding-rule-768);
+    margin-top: 3em;
+    margin-left: var(--space-sidebar-768);
+  }
+}
+
+@media all and (min-width: 1024px) {
+  div.not-found-page {
+    width: var(--width-rightside-1024);
+    margin-left: var(--space-sidebar-1024);
+  }
+}

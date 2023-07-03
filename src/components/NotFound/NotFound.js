@@ -1,7 +1,10 @@
+// Import CSS
+import "./NotFound.css"
+
 function NotFound() {
     return (
-        <div>
-            <h1>404</h1>
+        <div className="not-found-page">
+            <h1>404 NOT FOUND</h1>
         </div>
     )
 }
