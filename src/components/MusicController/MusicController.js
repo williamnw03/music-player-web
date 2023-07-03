@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom"
 // Import CSS
 import "./MusicController.css"
 
-function MusicController({music, setMusic, currentMusic, setCurrentMusic, data}) {
+function MusicController({music, currentMusic, data, musicNextPrev, loopInPlaylist}) {
 
     const [musicDuration, setMusicDuration] = useState(0)
     const [musicCurrentDuration, setMusicCurrentDuration] = useState(0)
@@ -25,32 +25,12 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
         }
     }
 
-    const musicNextPrev = (id, data, btn, setMusic, setCurrentMusic) => {
-        let music = {}
-        data.forEach((e, i) => {
-            if(e.id === id){
-                if(btn){
-                    music = data.length-1 === i ? data[0] : data[i+1]
-                } else {
-                    music = i === 0 ? data[data.length-1] : data[i-1]
-                }
-            }
-        })
-
-        setMusic(prev => {
-            const newAudio = prev
-            newAudio.src = `/music/${music.fileName}.mp3`
-            return newAudio
-        }) 
-        setCurrentMusic(music)
+    const playTheNextMusic = (e, id, data) => {
+        musicNextPrev(id, data, true)
     }
 
-    const playTheNextMusic = (e, id, data, setMusic, setCurrentMusic) => {
-        musicNextPrev(id, data, true, setMusic, setCurrentMusic)
-    }
-
-    const playThePrevMusic = (e, id, data, setMusic, setCurrentMusic) => {
-        musicNextPrev(id, data, false, setMusic, setCurrentMusic)
+    const playThePrevMusic = (e, id, data) => {
+        musicNextPrev(id, data, false)
     }
     
     const setTheVolume = (e, music) => {
@@ -83,7 +63,7 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
             music.play()
         } else {
             if(playMusic){
-                musicNextPrev(currentMusic.id, data, true, setMusic, setCurrentMusic)
+                musicNextPrev(currentMusic.id, data, true)
             } else {
                 music.pause()
             }
@@ -121,7 +101,7 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
         return () => {
             music.removeEventListener("ended", checkMusicEnded)
         }
-    }, [data])
+    }, [data, currentMusic, loopInPlaylist])
 
     return (
         <>
@@ -149,9 +129,9 @@ function MusicController({music, setMusic, currentMusic, setCurrentMusic, data})
                                 <input type="range" className="slider" max={100} min={0} value={volume} onChange={(e) => setTheVolume(e, music)}/>
                             </div>
 
-                            <button className="prev" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={(e) => playThePrevMusic(e, currentMusic.id, data, setMusic, setCurrentMusic)}><SkipStartFill></SkipStartFill></button>
+                            <button className="prev" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={(e) => playThePrevMusic(e, currentMusic.id, data)}><SkipStartFill></SkipStartFill></button>
                             <button className="play-pause" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={playTheMusic}>{playMusic ? <PauseFill/> : <PlayFill/>}</button>
-                            <button className="next" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={(e) => playTheNextMusic(e, currentMusic.id, data, setMusic, setCurrentMusic)}><SkipEndFill></SkipEndFill></button>
+                            <button className="next" style={{opacity: !currentMusic.title ? 0.3 : 1}} onClick={(e) => playTheNextMusic(e, currentMusic.id, data)}><SkipEndFill></SkipEndFill></button>
                             <button className="loop" onClick={() => setTheLoop(music)} style={{opacity: loop ? 1 : 0.3}}><Repeat></Repeat></button>
                         </div>
 

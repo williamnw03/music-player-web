@@ -5,8 +5,6 @@ import "./Alert.css"
 
 function Alert({itemToDelete, playlistDelete, removePlaylist, playlists, closeAlert, alertDelete, musicInPlaylistDelete, removeMusicInPlaylist, playlistID}) {
 
-    // console.log(musicInPlaylistDelete)
-
     const [playlistForMusic, setPlaylistForMusic] = useState(playlists.find(playlist => playlist.id == playlistID))
 
     useEffect(() => {

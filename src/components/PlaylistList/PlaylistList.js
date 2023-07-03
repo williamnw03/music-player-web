@@ -11,13 +11,15 @@ import Alert from "../Alert/Alert"
 // Import CSS
 import "./PlaylistList.css"
 
-function PlaylistList({data, playlists, changeMusicInPlaylist, showAlertDeleteMusicInPlaylist, removeMusicInPlaylist, closeAlert, alertDelete, changeAlertDelete}) {
+function PlaylistList({data, playlists, changeMusicInPlaylist, showAlertDeleteMusicInPlaylist, removeMusicInPlaylist, closeAlert, alertDelete, changeAlertDelete, dataInPlaylist, changeDataInPlaylist, loopInPlaylist, changeLoopInPlaylist}) {
 
     const navigate = useNavigate()
 
+    // Playlist ID
     const {playlistID} = useParams()
 
-    const [dataPlaylist, setDataPlaylist] = useState([])
+    // Current Playlist
+    const [playlistForMusic, setPlaylistForMusic] = useState(playlists.find(playlist => playlist.id == playlistID))
 
     // Music in PLaylist to Delete
     const [musicInPlaylistDelete, setMusicInPlaylistDelete] = useState(-1)
@@ -29,8 +31,6 @@ function PlaylistList({data, playlists, changeMusicInPlaylist, showAlertDeleteMu
     useEffect(() => {
 
         const playlistsDataLocalstorage = JSON.parse(localStorage.getItem("playlists"))
-        console.log("LEWAT")
-        console.log(playlistsDataLocalstorage[0])
 
         let currentPlaylist = {}
 
@@ -45,33 +45,30 @@ function PlaylistList({data, playlists, changeMusicInPlaylist, showAlertDeleteMu
                     currentPlaylist = e
                 }
             })
-
-            console.log(currentPlaylist)
     
-            setDataPlaylist(currentPlaylist.songs)
+            changeDataInPlaylist(currentPlaylist.songs)
+            setPlaylistForMusic(playlists.find(playlist => playlist.id == playlistID))
         } else {
             navigate("/playlists")
         }
 
     }, [playlists])
 
-    console.log(dataPlaylist.length)
-
     return (
     <>
         <Alert itemToDelete={"music-playlist"} musicInPlaylistDelete={musicInPlaylistDelete} removeMusicInPlaylist={removeMusicInPlaylist} playlists={playlists} closeAlert={closeAlert} alertDelete={alertDelete} playlistID={playlistID}/>
 
         <div className="playlist-list-wrapper">
-            <h1 className="title-page">Your Playlists</h1>
+            <h1 className="title-page">{playlistForMusic ? playlistForMusic.name : "Loading..."}</h1>
             <p className="subtitle-page">Up to 3 Playlists</p>
-            <p className="loop-this-playlist"><Repeat/> Loop This Playlist</p>
+            <p className="loop-this-playlist" style={{opacity: loopInPlaylist == playlistID ? 1 : 0.3}} onClick={() => changeLoopInPlaylist(playlistID, dataInPlaylist)}><Repeat/> Loop This Playlist</p>
             <div className="all-list-music-playlist">
 
-                {dataPlaylist.length === 0 ? false : dataPlaylist.map((e, i) => {
+                {dataInPlaylist.length === 0 ? false : dataInPlaylist.map((e, i) => {
 
                     // Filter
                     return (
-                        <EachPlaylistList key={i} data={data} musicID={e} changeMusicInPlaylist={changeMusicInPlaylist} playlists={playlists} showAlertDeleteMusicInPlaylist={showAlertDeleteMusicInPlaylist} changeAlertDelete={changeAlertDelete} changeMusicInPlaylistDelete={changeMusicInPlaylistDelete}></EachPlaylistList>
+                        <EachPlaylistList key={e} data={data} musicID={e} changeMusicInPlaylist={changeMusicInPlaylist} playlists={playlists} showAlertDeleteMusicInPlaylist={showAlertDeleteMusicInPlaylist} changeAlertDelete={changeAlertDelete} changeMusicInPlaylistDelete={changeMusicInPlaylistDelete}></EachPlaylistList>
                     )
 
                 })}

@@ -89,6 +89,12 @@ div.list-music-playlist div.delete-button div.button-delete{
     padding: 0.4em;
 
     cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+div.list-music-playlist div.delete-button div.button-delete:hover{
+    opacity: 1;
 }
 
 @media all and (max-width: 300px) {

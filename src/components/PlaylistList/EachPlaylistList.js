@@ -15,6 +15,8 @@ function EachPlaylistList({data, musicID, changeMusicInPlaylist, changeAlertDele
 
     const [musicSelected, setMusicSelected] = useState(data.find(e => e.id == musicID))
 
+    // console.log(musicSelected)
+
     // Artists
     let artists = ""
     musicSelected.artist.forEach((e, i) => artists += i+1 === musicSelected.artist.length ? e : `${e}, `)

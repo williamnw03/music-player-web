@@ -56,8 +56,36 @@ function App() {
     "genreShow": true
   })
 
+    const changeCurrentMusic = (musicData) => {
+        setCurrentMusic(musicData)
+    }
   // Seachbar
   const [searchValue, setSearchValue] = useState("")
+
+    // Music in Playlist
+    const [dataInPlaylist, setDataInPlaylist] = useState([])
+
+    // Loop in Playlist
+    const [loopInPlaylist, setLoopInPlaylist] = useState(-1)
+
+    // List Music to Loop in Playlist
+    const [listMusicToLoop, setListMusicToLoop] = useState([])
+
+    // Change Current Music in Playlist
+    const changeDataInPlaylist = (songs) => {
+        setDataInPlaylist(songs)
+    }
+
+    // Change Loop in Playlist
+    const changeLoopInPlaylist = (playlistID, listSongs) => {
+        if(playlistID == loopInPlaylist){
+            setLoopInPlaylist(-1)
+            setListMusicToLoop([])
+        } else {
+            setLoopInPlaylist(playlistID)
+            setListMusicToLoop(data.filter(e => listSongs.includes(e.id)))
+        }
+    }
 
   // Searchbar Filter
   const changeTheSearchValue = (ev) => {
@@ -235,10 +263,6 @@ function App() {
         changeMusicTemplate(fileName, data)
     }
 
-
-
-
-
   // Change Playlists Data
   const changePlaylistsData = (newData) => {
     setPlaylists(newData)
@@ -256,7 +280,6 @@ function App() {
 
   // Add New Playlist
   const addPlaylist = (playlists) => {
-    console.log(playlists)
       const newPlaylists = [...playlists]
 
       const emptyPlaylist = (id) => {
@@ -309,18 +332,46 @@ function App() {
         setAlertDelete(false)
     }
 
-
-
-
-
-
-
-
-
   // Close the Alert
   const closeTheAlert = () => {
     setAlertDelete(false)
   }
+
+    const musicNextPrev = (id, data, btn) => {
+        console.log(loopInPlaylist)
+        let musicData = data
+        let music = {}
+
+        if(loopInPlaylist !== -1){
+            console.log("LOOP JALAN")
+            musicData = listMusicToLoop
+        }
+
+
+        
+        musicData.forEach((e, i) => {
+            if(e.id === id){
+                if(btn){
+                    music = musicData.length-1 === i ? musicData[0] : musicData[i+1]
+                } else {
+                    music = i === 0 ? musicData[musicData.length-1] : musicData[i-1]
+                }
+            }
+        })
+
+        if(!Object.keys(music).length) {
+            music = musicData[0]
+        }
+
+        console.log(music)
+        
+        setMusic(prev => {
+            const newAudio = prev
+            newAudio.src = `/music/${music.fileName}.mp3`
+            return newAudio
+        }) 
+        setCurrentMusic(music)
+    }
 
   useEffect(() => {
 
@@ -360,11 +411,11 @@ function App() {
 
         <Route path="/playlists" element={<Playlists alertDelete={alertDelete} playlists={playlists} changePlaylistsData={changePlaylistsData} addPlaylist={addPlaylist} removePlaylist={removePlaylist} closeAlert={closeAlert} playlistDelete={playlistDelete} showAlertDeletePlaylist={showAlertDeletePlaylist}/>} />
 
-        <Route path="/playlists/:playlistID" element={<PlaylistList data={data} playlists={playlists} changeMusicInPlaylist={changeMusicInPlaylist} removeMusicInPlaylist={removeMusicInPlaylist} closeAlert={closeAlert} alertDelete={alertDelete} changeAlertDelete={changeAlertDelete}/>}></Route>
+        <Route path="/playlists/:playlistID" element={<PlaylistList data={data} playlists={playlists} changeMusicInPlaylist={changeMusicInPlaylist} removeMusicInPlaylist={removeMusicInPlaylist} closeAlert={closeAlert} alertDelete={alertDelete} changeAlertDelete={changeAlertDelete} dataInPlaylist={dataInPlaylist} changeDataInPlaylist={changeDataInPlaylist} loopInPlaylist={loopInPlaylist} changeLoopInPlaylist={changeLoopInPlaylist}/>}></Route>
 
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
-          <MusicController music={music} setMusic={setMusic} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} data={data}></MusicController>
+          <MusicController music={music} currentMusic={currentMusic} data={data} musicNextPrev={musicNextPrev} loopInPlaylist={loopInPlaylist}></MusicController>
     </BrowserRouter>
     
   );
