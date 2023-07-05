@@ -18,7 +18,7 @@ function AllListMusic({
     if (e.searchShow && e.genreShow) {
       return (
         <ListMusic
-          key={i}
+          key={e.id}
           munculPlaylists={munculPlaylists}
           data={e}
           changeMusic={changeMusic}

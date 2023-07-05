@@ -20,8 +20,8 @@ function Playlist({
 
   const [disabledEditName, setDisabledEditName] = useState(true);
 
-  // Playlist Name Change
-  const titleChange = (e, playlist, playlists) => {
+  // Changing name function
+  const changeNameFunc = (e, playlist, playlists) => {
     const sanitizeConf = {
       allowedTags: [],
       allowedAttributes: {},
@@ -51,6 +51,11 @@ function Playlist({
     changePlaylistsData(newPlaylists);
   };
 
+  // Playlist Name Change
+  const titleChange = (e, playlist, playlists) => {
+    changeNameFunc(e, playlist, playlists);
+  };
+
   // Max Length
   const maxLength = (e, id) => {
     const playlistSelected = document.querySelector(`p.playlist-no-${id}`);
@@ -60,6 +65,18 @@ function Playlist({
       playlistSelected.innerHTML = playlistName;
     } else {
       setPlaylistName(e.target.value);
+    }
+  };
+
+  // Enter change
+  const enterChange = (e, playlist, playlists) => {
+    const playlistSelected = document.querySelector(
+      `p.playlist-no-${playlist.id}`
+    );
+
+    if (e.code === "Enter") {
+      changeNameFunc(e, playlist, playlists);
+      setDisabledEditName(true);
     }
   };
 
@@ -116,6 +133,7 @@ function Playlist({
             }}
             onBlur={(e) => titleChange(e, playlist, playlists)}
             onChange={(e) => maxLength(e, playlist.id)}
+            onKeyDown={(e) => enterChange(e, playlist, playlists)}
             onClick={preventLink}
           />
 

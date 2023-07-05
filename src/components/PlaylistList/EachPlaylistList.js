@@ -32,7 +32,7 @@ function EachPlaylistList({
     <div
       className="list-music-playlist"
       onClick={(e) =>
-        changeMusicInPlaylist(e, musicSelected.fileName, musicSelected)
+        changeMusicInPlaylist(e, musicSelected.fileName, { ...musicSelected })
       }
     >
       <div className="image">
@@ -49,11 +49,11 @@ function EachPlaylistList({
       </div>
 
       <div className="delete-button">
-        <div className="button-delete">
-          <TrashFill
-            className="button-delete"
-            onClick={() => showAlertDeleteMusicInPlaylist(musicSelected.id)}
-          />
+        <div
+          className="button-delete"
+          onClick={() => showAlertDeleteMusicInPlaylist(musicSelected.id)}
+        >
+          <TrashFill className="button-delete" />
         </div>
       </div>
     </div>
