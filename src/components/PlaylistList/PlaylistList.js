@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // Import Font Icon
 import { Repeat } from "react-bootstrap-icons";
-import { useNavigate, useParams } from "react-router-dom";
 
 // Import Components
 import EachPlaylistList from "./EachPlaylistList";
@@ -24,6 +25,8 @@ function PlaylistList({
   changeDataInPlaylist,
   loopInPlaylist,
   changeLoopInPlaylist,
+  loadingData,
+  loadingPlaylists,
 }) {
   const navigate = useNavigate();
 
@@ -99,6 +102,18 @@ function PlaylistList({
         >
           <Repeat /> Loop This Playlist
         </p>
+        <ScaleLoader
+          color="#b9d2d2"
+          loading={loadingData && loadingPlaylists}
+          width={20}
+          height={70}
+          cssOverride={{
+            display: "block",
+            width: "max-content",
+            margin: "0 auto",
+            marginTop: "2em",
+          }}
+        />
         <div className="all-list-music-playlist">
           {dataInPlaylist.length === 0
             ? false

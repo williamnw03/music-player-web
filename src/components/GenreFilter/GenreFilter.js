@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,7 +12,12 @@ import { Navigation } from "swiper";
 import "./GenreFilter.css";
 import { useEffect, useState } from "react";
 
-function GenreFilter({ totalGenre, activeGenre }) {
+function GenreFilter({
+  totalGenre,
+  activeGenre,
+  loadingData,
+  loadingPlaylists,
+}) {
   const [slidesPerView, setSlidesPerView] = useState(1);
 
   // Check Window Width Size
@@ -39,22 +45,36 @@ function GenreFilter({ totalGenre, activeGenre }) {
   }, []);
 
   return (
-    <Swiper
-      navigation={true}
-      modules={[Navigation]}
-      slidesPerView={slidesPerView}
-      className="mySwiper"
-    >
-      {totalGenre.map((genre, i) => {
-        return (
-          <SwiperSlide key={i}>
-            <div className="content-slide" onClick={activeGenre}>
-              {genre}
-            </div>
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <>
+      <ScaleLoader
+        color="#b9d2d2"
+        loading={loadingData && loadingPlaylists}
+        width={10}
+        height={35}
+        cssOverride={{
+          display: "block",
+          width: "max-content",
+          margin: "0 auto",
+          marginTop: "2em",
+        }}
+      />
+      <Swiper
+        navigation={true}
+        modules={[Navigation]}
+        slidesPerView={slidesPerView}
+        className="mySwiper"
+      >
+        {totalGenre.map((genre, i) => {
+          return (
+            <SwiperSlide key={i}>
+              <div className="content-slide" onClick={activeGenre}>
+                {genre}
+              </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 }
 

@@ -14,6 +14,8 @@ import {
 import "./MusicController.css";
 
 function MusicController({
+  playMusic,
+  changePlayMusic,
   music,
   currentMusic,
   data,
@@ -25,7 +27,6 @@ function MusicController({
   const [musicCurrentDuration, setMusicCurrentDuration] = useState(0);
 
   const [SoundSlider, setSoundSlider] = useState(false);
-  const [playMusic, setPlayMusic] = useState(true);
   const [voluemOff, setVolumeOff] = useState(false);
   const [volume, setVolume] = useState(100);
   const [loop, setLoop] = useState(false);
@@ -44,19 +45,21 @@ function MusicController({
 
   const playTheMusic = () => {
     if (currentMusic.title !== "") {
-      setPlayMusic((prev) => !prev);
+      changePlayMusic();
     }
   };
 
   const playTheNextMusic = (e, id, data) => {
     if (currentMusic.title !== "") {
       musicNextPrev(id, data, true);
+      changePlayMusic(true);
     }
   };
 
   const playThePrevMusic = (e, id, data) => {
     if (currentMusic.title !== "") {
       musicNextPrev(id, data, false);
+      changePlayMusic(true);
     }
   };
 
@@ -118,7 +121,7 @@ function MusicController({
   };
 
   // Music Play
-  if (playMusic && currentMusic.title !== "") {
+  if (playMusic && currentMusic.title) {
     if (music.ended) {
       if (music.loop) {
         music.play();
@@ -164,8 +167,8 @@ function MusicController({
       <div className="music-controller">
         <div className="music-controller-wrapper">
           <div className="text-content">
-            <h3>{currentMusic.title}</h3>
-            <p>{currentMusic.artist}</p>
+            <h3>{currentMusic.title ? currentMusic.title : ""}</h3>
+            <p>{currentMusic.artist ? currentMusic.artist : ""}</p>
             <p className="playlist-playing">
               {currentPlaylist
                 ? `Playing "${currentPlaylist.name}" Playlist`

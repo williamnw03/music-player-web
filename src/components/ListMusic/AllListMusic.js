@@ -1,3 +1,5 @@
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 // Import Components
 import ListMusic from "./ListMusic";
 
@@ -12,6 +14,8 @@ function AllListMusic({
   munculPlaylists,
   closePlaylists,
   changeMusic,
+  loadingData,
+  loadingPlaylists,
 }) {
   const dataSongs = data.map((e, i) => {
     // Filter
@@ -39,11 +43,30 @@ function AllListMusic({
 
   return (
     <>
+      <ScaleLoader
+        color="#b9d2d2"
+        loading={loadingData && loadingPlaylists}
+        width={20}
+        height={70}
+        cssOverride={{
+          display: "block",
+          width: "max-content",
+          margin: "0 auto",
+          marginTop: "2em",
+        }}
+      />
       {dataSongs.filter((each) => each === undefined).length ===
       dataSongs.length ? (
-        <h1 style={{ color: "#f5f5f5", textAlign: "center", marginTop: "2em" }}>
+        <h3
+          style={{
+            color: "#f5f5f5",
+            textAlign: "center",
+            marginTop: "2em",
+            fontSize: "2em",
+          }}
+        >
           NOT FOUND
-        </h1>
+        </h3>
       ) : (
         false
       )}

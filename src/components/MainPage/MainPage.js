@@ -13,6 +13,8 @@ function MainPage({
   closePlaylists,
   changeMusic,
   closeAlert,
+  loadingData,
+  loadingPlaylists,
 }) {
   useEffect(() => closeAlert(), []);
 
@@ -21,6 +23,8 @@ function MainPage({
       <GenreFilter
         totalGenre={totalGenre}
         activeGenre={activeGenre}
+        loadingData={loadingData}
+        loadingPlaylists={loadingPlaylists}
       ></GenreFilter>
       <AllListMusic
         data={data}
@@ -29,6 +33,8 @@ function MainPage({
         munculPlaylists={munculPlaylists}
         closePlaylists={closePlaylists}
         changeMusic={changeMusic}
+        loadingData={loadingData}
+        loadingPlaylists={loadingPlaylists}
       ></AllListMusic>
     </>
   );

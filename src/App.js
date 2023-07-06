@@ -65,6 +65,9 @@ function App() {
   // Music in Playlist
   const [dataInPlaylist, setDataInPlaylist] = useState([]);
 
+  // Paly the music
+  const [playMusic, setPlayMusic] = useState(true);
+
   // Loop in Playlist
   const [loopInPlaylist, setLoopInPlaylist] = useState(-1);
 
@@ -73,6 +76,18 @@ function App() {
 
   // Playlist to Delete
   const [playlistDelete, setPlaylistDelete] = useState({});
+
+  // Loading state
+  const [loadingData, setLoadingData] = useState(true);
+  const [loadingPlaylists, setLoadingPlaylists] = useState(true);
+
+  const changePlayMusic = (bool) => {
+    if (bool) {
+      setPlayMusic(true);
+    } else {
+      setPlayMusic((prev) => !prev);
+    }
+  };
 
   // Change Current Music in Playlist
   const changeDataInPlaylist = (songs) => {
@@ -242,6 +257,7 @@ function App() {
       return newAudio;
     });
     setCurrentMusic(data);
+    setPlayMusic(true);
   };
 
   // Change Music
@@ -392,6 +408,10 @@ function App() {
     } else {
       setPlaylists(JSON.parse(localStorage.getItem("playlists")));
     }
+
+    // Loading
+    setLoadingData(false);
+    setLoadingPlaylists(false);
   }, []);
 
   return (
@@ -421,6 +441,8 @@ function App() {
               munculPlaylists={munculPlaylists}
               closePlaylists={closePlaylists}
               changeMusic={changeMusic}
+              loadingData={loadingData}
+              loadingPlaylists={loadingPlaylists}
             />
           }
         />
@@ -438,6 +460,7 @@ function App() {
                 closeAlert={closeAlert}
                 playlistDelete={playlistDelete}
                 showAlertDeletePlaylist={showAlertDeletePlaylist}
+                loadingPlaylists={loadingPlaylists}
               />
             }
           />
@@ -457,6 +480,8 @@ function App() {
                 changeDataInPlaylist={changeDataInPlaylist}
                 loopInPlaylist={loopInPlaylist}
                 changeLoopInPlaylist={changeLoopInPlaylist}
+                loadingData={loadingData}
+                loadingPlaylists={loadingPlaylists}
               />
             }
           ></Route>
@@ -465,6 +490,8 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <MusicController
+        playMusic={playMusic}
+        changePlayMusic={changePlayMusic}
         music={music}
         currentMusic={currentMusic}
         data={data}

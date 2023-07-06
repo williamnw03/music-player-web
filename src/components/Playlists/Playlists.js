@@ -1,3 +1,5 @@
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 // Impprt Components
 import Playlist from "./Playlist";
 import EmptyPlaylist from "./EmptyPlaylist";
@@ -17,6 +19,7 @@ function Playlists({
   closeAlert,
   playlistDelete,
   alertDelete,
+  loadingPlaylists,
 }) {
   return (
     <>
@@ -31,6 +34,18 @@ function Playlists({
       <div className="playlists-wrapper">
         <h1 className="title-page">Your Playlists</h1>
         <p className="subtitle-page">Up to 3 Playlists</p>
+        <ScaleLoader
+          color="#b9d2d2"
+          loading={loadingPlaylists}
+          width={20}
+          height={70}
+          cssOverride={{
+            display: "block",
+            width: "max-content",
+            margin: "0 auto",
+            marginTop: "2em",
+          }}
+        />
         <div className="all-playlists">
           {playlists.length >= 1
             ? playlists.map((playlist) => {
