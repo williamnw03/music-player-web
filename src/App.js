@@ -47,7 +47,6 @@ function App() {
   // Initiat Music
   const [music, setMusic] = useState(new Audio(""));
 
-  music.type = "audio/mpeg";
   // Current Music
   const [currentMusic, setCurrentMusic] = useState({
     id: "",
@@ -243,17 +242,7 @@ function App() {
       return newAudio;
     });
     setCurrentMusic(data);
-
-    console.log(data);
   };
-
-  useEffect(() => {
-    console.log("Music Berubah");
-  }, [music]);
-
-  useEffect(() => {
-    console.log("Current Music Berubah");
-  }, [currentMusic]);
 
   // Change Music
   const changeMusic = (e, fileName, data) => {

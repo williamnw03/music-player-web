@@ -74,7 +74,7 @@ function Playlist({
       `p.playlist-no-${playlist.id}`
     );
 
-    if (e.code === "Enter") {
+    if (e.key === "Enter") {
       changeNameFunc(e, playlist, playlists);
       setDisabledEditName(true);
     }
