@@ -49,11 +49,15 @@ function MusicController({
   };
 
   const playTheNextMusic = (e, id, data) => {
-    musicNextPrev(id, data, true);
+    if (currentMusic.title !== "") {
+      musicNextPrev(id, data, true);
+    }
   };
 
   const playThePrevMusic = (e, id, data) => {
-    musicNextPrev(id, data, false);
+    if (currentMusic.title !== "") {
+      musicNextPrev(id, data, false);
+    }
   };
 
   const setTheVolume = (e, music) => {
