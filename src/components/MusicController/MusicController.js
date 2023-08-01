@@ -127,7 +127,14 @@ function MusicController({
         music.play();
       }
     } else {
-      music.play();
+      let playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then((_) => {})
+          .catch((error) => {
+            console.log("Play music to fast");
+          });
+      }
     }
   } else {
     music.pause();
