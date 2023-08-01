@@ -123,20 +123,19 @@ function App() {
   // Choose Genres
   const activeGenre = (e) => {
     let newGenres = [];
-    setCurrentGenre((prev) => {
-      const genre = e.target.textContent;
-      if (prev.includes(genre)) {
-        newGenres = prev.filter((e) => {
-          if (e !== genre) {
-            return e;
-          }
-        });
-        return newGenres;
-      } else {
-        newGenres = [...prev, e.target.textContent];
-        return newGenres;
-      }
-    });
+    const genre = e.target.dataset.genre;
+
+    if (currentGenre.includes(genre)) {
+      newGenres = currentGenre.filter((e) => {
+        if (e !== genre) {
+          return e;
+        }
+      });
+    } else {
+      newGenres = [...currentGenre, e.target.dataset.genre];
+    }
+
+    setCurrentGenre(newGenres);
 
     // Filter Genre
     setData((prev) => {

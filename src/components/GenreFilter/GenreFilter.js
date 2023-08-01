@@ -67,7 +67,11 @@ function GenreFilter({
         {totalGenre.map((genre, i) => {
           return (
             <SwiperSlide key={i}>
-              <div className="content-slide" onClick={activeGenre}>
+              <div
+                className="content-slide"
+                onClick={activeGenre}
+                data-genre={genre}
+              >
                 {genre}
               </div>
             </SwiperSlide>
