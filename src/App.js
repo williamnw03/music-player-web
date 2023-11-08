@@ -483,7 +483,7 @@ function App() {
                 loadingPlaylists={loadingPlaylists}
               />
             }
-          ></Route>
+          />
         </Route>
 
         <Route path="*" element={<NotFound />}></Route>
